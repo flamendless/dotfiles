@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+alias i3config='vim ~/.i3/config'
+alias polybarconf='vim ~/.config/polybar/config'
+alias vimrc='vim ~/.vimrc'
+alias zshrc='vim ~/.zshrc'
+alias aliases='vim ~/._aliases'
+alias functions='vim ~/._functions'
+alias reload='source ~/.zshrc'
+
+alias cls='clear'
+alias count='ls -1|wc -l'
+alias ls='lsd -l'
+alias la='lsd -la'
+alias cp='rsync -avh --info=progress2'
+alias mv='mv -iv'
+alias rm='rm -iv'
+alias d='dirs -v | head -10'
+alias cat='bat'
+
+alias bmake='bear make'
+alias fmake='make -B'
+alias dir_size='du -sh'
+alias grep='noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)'
+alias compton_start='compton --config /home/brbl/.config/compton.conf -b'
+alias compton_stop='pkill -KILL compton'
+alias picsize='identify -format "%wx%h"'
+alias metadata='exiftool'
+alias music='ncmpcpp'
+
+alias diff='git diff'
+alias gLS="git log --pretty='%at|%s' | sort -n > gitlog.txt"
+alias gLD="git log --graph --date=short --pretty=format:'%ad - %s'"
+alias gL="git log --pretty=oneline"
+alias gS='git status'
+alias gA='git add -A'
+alias gC='git commit -m'
+alias gU='git pull'
+alias gP='git push'
+
+alias clear_screenshots='rm -rf ~/temp/screenshots && mkdir -p ~/temp/screenshots'
+alias v='vim $(fzf)'
+alias untargz='tar xvzf'
+
+alias safe_upgrade='sudo pacman -Syu'
+
+alias stop_apache='sudo /opt/lampp/lampp stopapache'
+alias start_apache='sudo /opt/lampp/lampp startapache'
+
+alias stop_mysql='sudo /opt/lampp/lampp stopmysql'
+alias start_mysql='sudo /opt/lampp/lampp startmysql'
+
+alias wifi_connect='nmcli con up'
+alias wifi_disconnect='nmcli con down'
+
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias obs2='LIBGL_ALWAYS_SOFTWARE=1 obs'

@@ -1,0 +1,16 @@
+; Global Settings
+
+[settings]
+screenchange-reload = true
+
+[colors]
+transparent = #00ffffff
+background = ${xrdb:background}
+foreground = ${xrdb:foreground}
+foreground-alt = ${xrdb:highlight}
+
+border = ${xrdb:i3_focused}
+
+urgent = ${xrdb:i3_urgent}
+focused = ${xrdb:i3_focused}
+unfocused = ${xrdb:foreground}

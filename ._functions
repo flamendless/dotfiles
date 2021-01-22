@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+
+apk_sign() {
+	if [ $# -eq 0 ]; then
+		echo "arg1 is apk name; arg2 is keystore file;"
+	else
+		echo "enter keystore password:"
+		read password;
+		apk-signer -f "$1.apk" -a flamendless -k "$2" -s "$password";
+		echo "signed!";
+
+		echo "Do you want to do adb install? (y or else)"
+		read REPLY
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			adb install "$1-unaligned.apk";
+			echo "adb installed!";
+		fi
+	fi
+}
+
+apk_compile() {
+	if [ $# -eq 0 ]; then
+		echo "arg1 is apk name (no extension)";
+	else
+		apktool b -o "$1.apk" decoded;
+	fi
+}
+
+apk_decompile() {
+	if [ $# -eq 0 ]; then
+		echo "arg1 is apk to decompile";
+	else
+		apktool d -s -o decoded "$1";
+	fi
+}
+
+love_zip() {
+	noglob zip -9rv game.love . -x *.git* *.md* *.txt* *.rst* *docs/* *.ase* *.swp* *spec/* *test/* *rockspec* *.mak* *.yml* *ctags* *Makefile*;
+}
+
+count_lines() {
+	if [ $# -ne 0 ]; then
+		find $@ -name '*.lua' | xargs wc -l;
+	fi
+}
+
+gource_play() {
+	if [ $# -ne 0 ]; then
+		gource --title "$1" --caption-file gitlog.txt --caption-offset 8 --user-scale 0.5;
+	fi
+}
+
+gource_stream() {
+	if [ $# -ne 0 ]; then
+		gource -720x640 --auto-skip-seconds 1 --camera-mode track --time-scale 4 --title "$1" --caption-file gitlog.txt --caption-offset 8 --user-scale 0.5 -o - | ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -crf 1 -threads 0 -bf 0 gource.mp4;
+	fi
+}
+
+batch_rename() {
+	a=1
+	for i in *.png; do
+  	new=$(printf "%04d.png" "$a")
+  	mv -i -- "$i" "$new"
+  	let a=a+1
+	done
+}
+
+batch_rename_jpeg() {
+	a=1
+	for i in *.jpg; do
+  	new=$(printf "%04d.jpg" "$a")
+  	mv -i -- "$i" "$new"
+  	let a=a+1
+	done
+}
+
+png_to_timelapse() {
+	if [ $# -ne 0 ]; then
+		ffmpeg -framerate "$1" -pattern_type glob -i "*.png" output.mkv;
+	else
+		echo "arg1 is framerate (default=24);"
+	fi
+}
+
+record_png() {
+	if [ $# -ne 0 ]; then
+		while true; do scrot & sleep "$1"; done
+		count;
+	else
+		echo "arg1 is seconds interval (default=10)";
+	fi
+}
+
+screen_record() {
+	if [ $# -ne 0 ]; then
+		ffmpeg -video_size 1280x800 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -crf 0 -preset ultrafast $1.mkv;
+	fi
+}
+
+find_in_files() {
+	if [ $# -ne 0 ]; then
+		noglob grep -R --exclude-dir={.git,modules} "$1" .
+	fi
+}
+
+count_files() {
+	if [ $# -eq 1 ]; then
+		ls -l $1 | wc -l
+	fi
+}
+
+fif() {
+	rg --files-with-matches --no-messages $1 | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 $1 || rg --ignore-case --pretty --context 10 $1 {}"
+}
+
+cdi() {
+    if [[ "$#" != 0 ]]; then
+        builtin cd "$@";
+        return
+    fi
+    while true; do
+        local lsd=$(echo ".." && /usr/bin/ls -p | grep '/$' | sed 's;/$;;')
+        local dir="$(printf '%s\n' "${lsd[@]}" |
+            fzf --reverse --preview '
+                __cd_nxt="$(echo {})";
+                __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+                echo $__cd_path;
+                echo;
+                /usr/bin/ls -p --color=always "${__cd_path}";
+        ')"
+        [[ ${#dir} != 0 ]] || return 0
+        builtin cd "$dir" &> /dev/null
+    done
+}
+
+batch_resize() {
+	if [ $# -ne 0 ]; then
+		for image in *.png; do convert "$image" -resize "$1" "$image"; done
+	else
+		echo "arg1 is dimension; eg 1028x720"
+	fi
+}
+
+timelapse_help() {
+	echo "cd to timelapse/raw";
+	echo "record_png arg_interval";
+	echo "batch_rename arg_dimension";
+	echo "png_to_timelapse arg_fps";
+}
+
+combine_help()
+{
+	echo "$ cat mylist.txt
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+$ ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4";
+}
+
+find_largest() {
+	find . -type f -size +20M -exec ls -lh {} \; | awk '{ print $NF ": " $5 }'
+}

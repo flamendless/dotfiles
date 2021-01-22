@@ -1,0 +1,167 @@
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = true
+reverse-scroll = true 
+fuzzy-match = false
+format = <label-state> <label-mode>
+label-mode = %mode%
+label-mode-padding = 1
+label-focused =%icon%%name%
+label-focused-foreground = ${colors.focused}
+label-focused-margin = 2
+label-unfocused =%icon%%name%
+label-unfocused-foreground = ${colors.unfocused}
+label-unfocused-margin = 1
+label-visible =%icon%%name%
+label-visible-margin = 1
+label-urgent =%icon%%name%
+label-urgent-foreground = ${colors.urgent}
+label-urgent-padding = 1
+
+[module/i3_dots]
+type = internal/i3
+ws-icon-default =" 󰀥 "
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = true
+reverse-scroll = true 
+fuzzy-match = false
+format =<label-state><label-mode>
+label-mode = %mode%
+label-focused =" 󰄯 " 
+label-focused-foreground = ${colors.foreground}
+label-unfocused =" 󰄰 " 
+label-unfocused-foreground = ${colors.foreground}
+label-visible =" 󰄯 " 
+label-urgent =" 󰀨 " 
+label-urgent-foreground = ${colors.foreground-alt}
+
+; Module Menus
+
+[module/i3touchmenu]
+type = custom/menu
+expand-right = true
+format-spacing = 1
+label-open = "| touch"
+label-open-foreground = #FFF
+label-close = "| x"
+label-separator = "'"
+; Menu Root 
+menu-0-0 = 
+menu-0-0-exec = menu-open-1
+menu-0-1 = 
+menu-0-1-exec = menu-open-2
+menu-0-2 = 
+menu-0-2-exec = menu-open-3
+menu-0-3 = 
+menu-0-3-exec = menu-open-4
+menu-0-4 = 
+menu-0-4-exec = menu-open-5
+menu-0-5 = 
+menu-0-5-exec = menu-open-6
+menu-0-6 = 
+menu-0-6-exec = menu-open-7
+menu-0-7 ="" 
+menu-0-7-exec = menu-open-8
+; Menu Category Launcher
+menu-1-0 = 
+menu-1-0-exec = menu-open-0
+menu-1-1="quick"
+menu-1-1-exec= setsid quicklaunch
+menu-1-2="xournal"
+menu-1-2-exec = "setsid xournalpp"
+menu-1-3="sync"
+menu-1-3-exec = "setsid python Sync/o_school/5AHEL/Notebooks/pdfconvert.py"
+menu-1-4=""
+menu-1-4-exec = urxvt &
+; Menu Category Window Movement
+menu-2-0 = 
+menu-2-0-exec = menu-open-0
+menu-2-1 = 
+menu-2-1-exec = i3-msg 'move left'
+menu-2-2 = 
+menu-2-2-exec = i3-msg 'move right'
+menu-2-3 = 
+menu-2-3-exec = i3-msg 'move up'
+menu-2-4 = ""
+menu-2-4-exec = i3-msg 'move down'
+menu-3-0 = 
+menu-3-0-exec = menu-open-0
+; Menu Category Layout
+menu-3-1 = split
+menu-3-1-exec = i3-msg 'layout toggle split'
+menu-3-2 = stack
+menu-3-2-exec = i3-msg 'layout stacking'
+menu-3-3 = tab  
+menu-3-3-exec = i3-msg 'layout tabbed'
+menu-3-4 = float
+menu-3-4-exec = i3-msg 'floating toggle'
+; Menu Category Split
+menu-4-0 = 
+menu-4-0-exec = menu-open-0
+menu-4-1 = vert
+menu-4-1-exec = i3-msg 'split v'
+menu-4-2 = horz
+menu-4-2-exec = i3-msg 'split h'
+; Menu Category Resize
+menu-5-0 = 
+menu-5-0-exec = menu-open-0
+menu-5-1 = h+
+menu-5-1-exec = i3-msg 'resize grow height 5 px or 5 ppt'
+menu-5-2 = h-
+menu-5-2-exec = i3-msg 'resize shrink height 5 px or 5 ppt'
+menu-5-3 = w+
+menu-5-3-exec = i3-msg 'resize grow width 5 px or 5 ppt'
+menu-5-4 = w-
+menu-5-4-exec = i3-msg 'resize shrink width 5 px or 5 ppt'
+; Menu Category Move
+menu-6-0 = 
+menu-6-0-exec = menu-open-0
+menu-6-1 = 1
+menu-6-1-exec = i3-msg 'move container to workspace 1'
+menu-6-2 = 2
+menu-6-2-exec = i3-msg 'move container to workspace 2'
+menu-6-3 = 3
+menu-6-3-exec = i3-msg 'move container to workspace 3'
+menu-6-4 = 4
+menu-6-4-exec = i3-msg 'move container to workspace 4'
+menu-6-5 = 5
+menu-6-5-exec = i3-msg 'move container to workspace 5'
+menu-6-6 = 6
+menu-6-6-exec = i3-msg 'move container to workspace 6'
+menu-6-7 = 7
+menu-6-7-exec = i3-msg 'move container to workspace 7'
+menu-6-8 = 8
+menu-6-8-exec = i3-msg 'move container to workspace 8'
+menu-6-9 = 9
+menu-6-9-exec = i3-msg 'move container to workspace 9'
+menu-6-10 = "10"
+menu-6-10-exec = i3-msg 'move container to workspace 10'
+; Menu Category Kill
+menu-7-0 = 
+menu-7-0-exec = menu-open-0
+menu-7-1 = "confirm"
+menu-7-1-exec = i3-msg 'kill'
+; Menu Category Powermenu
+menu-8-0 = 
+menu-8-0-exec = menu-open-0
+menu-8-1 = 
+menu-8-1-exec = xset dpms force off 
+menu-8-2 = 
+menu-8-2-exec = i3lock
+menu-8-3 = 
+menu-8-3-exec = shutdown -r now
+menu-8-4 = ""
+menu-8-4-exec = shutdown -h now

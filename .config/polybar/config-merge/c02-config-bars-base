@@ -1,0 +1,53 @@
+[bar/base_master]
+background = ${colors.background}
+foreground = ${colors.foreground}
+fixed-center = true
+font-0 = Hack Nerd Font:fontformat=truetype:pixelsize=10;1
+font-1 = Material Design Icons:fontformat=truetype:pixelsize=10:antialias=true;1
+line-size = 1
+module-margin-left = 1
+module-margin-right = 1
+padding= 2
+separator =|
+override-redirect = true
+
+[bar/base_border]
+inherit="bar/base_master"
+border-size=2
+border-color=${colors.border}
+radius = 15.0
+
+[bar/base_floating]
+inherit="bar/base_border"
+bottom = true
+enable-ipc = false
+height = 40px
+width = 60%
+offset-x = 20%
+offset-y = 8px
+override-redirect = true
+tray-detached = true
+tray-maxsize = 15
+tray-offset-x= 86
+tray-offset-y = 4px
+tray-padding = 3
+tray-position = left
+tray-scale = 0.8
+
+[bar/base_floating_popup]
+inherit="bar/base_border"
+bottom = true
+enable-ipc = true
+height = 40px
+width = 22%
+offset-x = 20%
+offset-y = 58px
+
+[bar/base_floating_wm]
+inherit="bar/base_master"
+font-0 = dark forest:style=Bold:fontformat=truetype:pixelsize=10;4
+height = 15
+width = 100%
+modules-center = i3
+padding= 4
+wm-restack = i3

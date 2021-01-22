@@ -1,0 +1,234 @@
+; Module popup
+
+[module/floating_popup_button]
+type = custom/script
+interval = 0.5
+format = <label>
+label-maxlen = 5
+exec = ~/.config/polybar/scripts/polypopup.sh
+click-left = ~/.config/polybar/scripts/polypopup.sh --toggle
+content = 󰋼
+
+; Module Date
+
+[module/clock]
+type = internal/date
+interval = 1
+date =
+date-alt =%d.%m.%Y
+time =" %H:%M"
+time-alt =%H:%M:%S,
+label =%time% %date% 
+
+[module/clock_icon]
+inherit = "module/clock"
+date = 󰥔
+
+; Module Updates
+
+[module/checkupdates]
+type = custom/script
+interval = 30
+format = 󰂪 <label>
+label-maxlen=15
+label-ellipsis=true
+exec = "echo $(bash ~/.config/polybar/scripts/modules/update.sh --count-short)"
+click-left = "setsid termite -e bash ~/.config/polybar/scripts/modules/update.sh --list"
+click-right = "setsid termite -e bash ~/.config/polybar/scripts/modules/update.sh --update"
+click-middle = "setsid termite -e bash ~/.config/polybar/scripts/modules/update.sh --update-noconfirm"
+
+; Module HW-Statistics
+; For 'sensors_'-modules, run 'sensors-detect' from 'lm_sensors' first
+
+[module/memory]
+type = internal/memory
+interval = 2
+label = 󰆼 %percentage_used%%
+
+[module/nvgpu]
+type = custom/script
+interval = 2
+format = 󰹑 <label>
+label-maxlen=15
+label-ellipsis=true
+exec = "echo $((nvidia-smi -q | grep "Gpu" | awk -F':' '{print $2}' | tr -d ' '; echo ", "; nvidia-smi -q | grep "GPU Current Temp" | awk -F':' '{print $2}' | tr -d ' C' ; echo '°') | cat | tr -d '\n')"
+click-left = "setsid termite -e sh -c nvtop"
+
+[module/sensors_cpu_pc]
+type = custom/script
+interval = 2
+format = 󰍛 <label>
+label-maxlen=15
+label-ellipsis=true
+exec = "echo $((top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\([0-9.]*\)%* id.*/\1/' | awk -F '.' '{print 100 - $1}' ; echo '%, ' ; sensors | grep "CPUTIN" | awk -F' ' '{print $2}' | awk -F'.' '{print $1}' | tr -d '+'; echo '°') | tr -d '\n')"
+click-left = "setsid termite -e sh -c htop"
+
+[module/sensors_cpu_yoga3]
+type = custom/script
+interval = 2
+format = 󰍛 <label>
+label-maxlen=15
+label-ellipsis=true
+exec = "echo $((top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\([0-9.]*\)%* id.*/\1/' | awk -F '.' '{print 100 - $1}' ; echo '%, ' ; sensors | grep "Package id 0:" | awk -F' ' '{print $4}' | awk -F'.' '{print $1}' | tr -d '+'; echo '°') | tr -d '\n')"
+click-left = "setsid termite -e sh -c htop"
+
+; Module Network Interfaces
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3
+format-connected = <label-connected>
+label-connected = %ifname%: %local_ip% [%essid%]
+
+[module/wlan_short]
+inherit="module/wlan"
+label-connected = %essid%
+
+[module/eth_pc]
+type = internal/network
+interface = wlp3s0
+interval = 3
+format-connected = <label-connected>
+label-connected = 󰈀 %local_ip%
+
+[module/eth_yoga3]
+inherit="module/eth_pc"
+interface = enp0s31f6
+
+[module/usbmodem1]
+type = custom/script
+format = usb: <label>
+interval = 3
+exec = bash .config/polybar/scripts/modules/usbmodem.sh enp0s20f0u1
+
+[module/usbmodem2]
+inherit="module/usbmodem1"
+exec = bash .config/polybar/scripts/modules/usbmodem.sh enp0s20f0u6
+
+[module/usbmodem3]
+inherit="module/usbmodem1"
+exec = bash .config/polybar/scripts/modules/usbmodem.sh enp0s20f0u3
+
+[module/usbmodem4]
+inherit="module/usbmodem1"
+exec = bash .config/polybar/scripts/modules/usbmodem.sh ens8u1u2
+
+; Module VPN
+
+[module/ovpn]
+type = custom/script
+interval = 3
+format = ovpn: <label>
+label-maxlen=50
+label-ellipsis=true
+exec = echo $(nmcli con show --active | grep vpn | cut -c1-12 | tr -d ' ')
+
+[module/nvpn]
+inherit="module/ovpn"
+format = nvpn: <label>
+exec = echo $(nordvpn status | grep -oP '(?<=Current server: ).*' | cut -f1 -d'.')
+
+; Module Volume + Media
+
+[module/volume]
+type = internal/pulseaudio
+master-mixer = IEC958
+mapped = true
+format-volume = <label-volume>
+label-volume =  %percentage%
+label-volume-foreground = ${root.foreground}
+format-muted-foreground = ${root.foreground}
+label-muted =  x
+interval = 1
+
+[module/playerctl]
+type = custom/script
+tail = true
+exec = ~/.config/polybar/scripts/modules/playerctl.sh
+click-left = "playerctl play-pause"
+click-right = "playerctl next"
+click-middle = "playerctl previous"
+
+[module/playerctl_long]
+inherit="module/playerctl"
+exec = bash ~/.config/polybar/scripts/modules/playerctl.sh 30
+
+[module/playerctl_buttons]
+type = custom/menu
+expand-right = true
+label-open = 
+label-close = 
+label-separator = "  "
+menu-0-0 = 
+menu-0-0-exec = "playerctl previous"
+menu-0-1 = 
+menu-0-1-exec = "playerctl play-pause"
+menu-0-2 = 
+menu-0-2-exec = "playerctl next"
+
+[module/pavucontrol_button]
+type = custom/text
+content = 󰕾 |
+click-left = "setsid pavucontrol"
+click-middle = "bash ~/Userdata/Scripts/Launchers/restart_pulseaudio_1s.sh"
+
+[module/cava]
+type = custom/script
+tail = true
+exec = python /home/sim/.config/polybar/scripts/modules/cava.py
+
+; Module Battery
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+poll-interval = 3
+adapter = ADP1
+full-at = 95
+label-full = bat: %percentage%%
+label-charging = bat: %percentage%% (+%consumption%W, %time%)
+label-discharging = bat: %percentage%% (-%consumption%W, %time%)
+
+[module/battery_short]
+inherit = "module/battery"
+label-full = bat: %percentage%%
+label-charging = bat: %percentage%%
+label-discharging = bat: %percentage%%
+
+; Module Disk
+
+[module/disk_short_pc]
+type = custom/script
+format = 󰆓 <label>
+interval = 10
+exec = echo $(df -h / | tail +2 | awk -F ' ' '{print $3 " / " $2 " (" $5 ")"}' | tr -d 'G')
+click-left = "setsid termite -e sh -c 'echo Disk overview... ; echo ; df -h -x tmpfs; echo ; read -p Done'"
+click-right = "setsid termite -e sh -c 'echo Scanning main disk ; echo ; ncdu --exclude /data / ; echo ; read -p Done!'"
+click-middle = "setsid termite -e sh -c 'echo Scanning full disk... ; echo ; sudo ncdu / ; echo ; read -p Done!'"
+
+[module/disk_short_pc_spacer]
+inherit = "module/disk_short_pc"
+format = | 󰆓 <label>
+
+[module/disk_short_yoga3]
+inherit = "module/disk_short_pc"
+exec = echo $(df -h / | tail +2 | awk -F ' ' '{print $3 " / " $2 " (" $5 ")"}' | tr -d 'G')
+
+; Module Backlight
+
+[module/xbacklight]
+type = internal/xbacklight
+format = <label>
+label = %percentage% 
+
+[module/xbacklight_buttons]
+type = custom/menu
+expand-right = true
+label-open = blght
+label-close = x
+label-separator = "  "
+menu-0-0 = -
+menu-0-0-exec = "xbacklight -dec 10; notify-send 'brightness down'"
+menu-0-1 = +
+menu-0-1-exec = "xbacklight -inc 10; notify-send 'brightness up'"
