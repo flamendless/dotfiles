@@ -79,7 +79,7 @@ bindsym $mod+Shift+a exec xfce4-appfinder
 bindsym $mod+q kill
 # bindsym $mod+Shift+d exec --no-startup-id rofi -show
 bindsym $mod+space exec rofi -show
-bindsym $mod+a exec rofi -show combi -theme /home/brbl/.local/share/rofi/themes/minimal.rasi
+bindsym $mod+a exec rofi -show combi -theme /home/brbl/.local/share/rofi/themes/murz.rasi
 bindsym $mod+Shift+n exec networkmanager_dmenu
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'

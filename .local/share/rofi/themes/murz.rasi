@@ -26,6 +26,10 @@ element, entry, prompt {
   text-color: @fg-alt;
 }
 
+element-icon {
+	size: 1.2em;
+}
+
 element selected {
   background-color: @bg-alt;
   text-color: @fg;

@@ -7,5 +7,5 @@ configuration {
 	theme: "/home/brbl/.local/share/rofi/themes/minimal.rasi";
 	display-window: "  ";
 	display-run: " ";
-	display-drun: "  ";
+	/* display-drun: "  "; */
 }

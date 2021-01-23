@@ -44,6 +44,10 @@ element {
   text-color: @frost-3;
 }
 
+element-icon {
+	size: 1.2em;
+}
+
 element selected {
   text-color: @aurora-3;
 }
