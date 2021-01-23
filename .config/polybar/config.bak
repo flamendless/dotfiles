@@ -81,20 +81,20 @@ wm-restack = i3
 
 [bar/floating]
 inherit="bar/base_floating"
-monitor = ${env:MONITOR:LVDS-1}
+monitor = ${env:MONITOR:}
 ;modules-center = cava clock playerctl_long
 modules-center = cava
 modules-left = floating_popup_button pavucontrol_button
-modules-right = sensors_cpu_pc nvgpu memory
+modules-right = sensors_cpu_pc memory
 
 [bar/floating_popup]
 inherit="bar/base_floating_popup"
-monitor = ${env:MONITOR:LVDS-1}
-modules-left = disk_short_pc checkupdates ovpn nvpn eth_pc 
+monitor = ${env:MONITOR:}
+modules-left = disk_short_pc eth_pc
 
 [bar/floating_wm]
 inherit="bar/base_floating_wm"
-monitor = ${env:MONITOR:LVDS-1}
+monitor = ${env:MONITOR:}
 
 [global/wm]
 margin-top = 0
@@ -442,7 +442,7 @@ click-middle = "bash ~/Userdata/Scripts/Launchers/restart_pulseaudio_1s.sh"
 [module/cava]
 type = custom/script
 tail = true
-exec = python /home/sim/.config/polybar/scripts/modules/cava.py
+exec = python /home/brbl/.config/polybar/scripts/modules/cava.py
 
 ; Module Battery
 

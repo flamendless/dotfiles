@@ -176,7 +176,7 @@ click-middle = "bash ~/Userdata/Scripts/Launchers/restart_pulseaudio_1s.sh"
 [module/cava]
 type = custom/script
 tail = true
-exec = python /home/sim/.config/polybar/scripts/modules/cava.py
+exec = python /home/brbl/.config/polybar/scripts/modules/cava.py
 
 ; Module Battery
 

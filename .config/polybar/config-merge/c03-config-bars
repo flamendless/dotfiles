@@ -4,12 +4,12 @@ monitor = ${env:MONITOR:}
 ;modules-center = cava clock playerctl_long
 modules-center = cava
 modules-left = floating_popup_button pavucontrol_button
-modules-right = sensors_cpu_pc nvgpu memory
+modules-right = sensors_cpu_pc memory
 
 [bar/floating_popup]
 inherit="bar/base_floating_popup"
 monitor = ${env:MONITOR:}
-modules-left = disk_short_pc checkupdates ovpn nvpn eth_pc 
+modules-left = disk_short_pc eth_pc
 
 [bar/floating_wm]
 inherit="bar/base_floating_wm"
