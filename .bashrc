@@ -5,19 +5,13 @@ if [ -f ~/._functions ]; then
     . ~/._functions
 fi
 
-source ~/.bash/mysql-colorize/mysql-colorize.bash
 source ~/.bash/git-completion.bash
 source ~/.bash/git-prompt.sh
 source /usr/share/doc/pkgfile/command-not-found.bash
 source /usr/share/bash-completion/bash_completion
 
-function nonzero_return() {
-	RETVAL=$?
-	[ $RETVAL -ne 0 ] && echo "$RETVAL"
-}
-
 export GIT_PS1_SHOWDIRTYSTATE=1
-export PS1="\[\e[31m\]\s\[\e[m\]:\[\e[36m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]  \w \[\e[32m\] [\$(git symbolic-ref --short HEAD 2>/dev/null)]\\[\e[m\] \[\e[31m\]*\[\e[m\]\[\e[31m\]\`nonzero_return\`\[\e[m\] \n\[$(tput sgr0)\]\$ "
+export PS1="\[\e[31m\]\s\[\e[m\]:\[\e[36m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]  \w \[\e[32m\] [\$(git symbolic-ref --short HEAD 2>/dev/null)]\\[\e[m\]\[\e[m\]\[\e[31m\]\[\e[m\] \n\[$(tput sgr0)\]\$ "
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
