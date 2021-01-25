@@ -71,6 +71,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'morhetz/gruvbox'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
+Plug 'jdonaldson/vaxe', { 'for': 'haxe' }
 call plug#end()
 
 colorscheme gruvbox
@@ -81,6 +82,7 @@ syntax enable
 set runtimepath+=~/.vim-plugins/LanguageClient-neovim
 runtime macros/matchit.vim
 
+nnoremap <space><space> <C-w>w
 nnoremap fh :CtrlPMRUFiles<CR>
 nnoremap <F1> *<C-O>:%s///gn<CR>
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
@@ -120,18 +122,12 @@ nnoremap <leader>s :Rg <C-r><C-w><CR>
 " noremap  <Right> ""
 " noremap! <Right> <Esc>
 
-if filereadable(".gitignore")
-	nnoremap <space><space> :GFiles<CR>
-else
-	nnoremap <space><space> :Files<CR>
-endif
-
 let g:LanguageClient_autoStart = 1
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build',
   \ 'file': '\v\.(exe|dll)$',
   \ }
 
@@ -150,6 +146,10 @@ endfunction
 
 function! SetJava()
 	nnoremap <leader>l :!javac % && java %:r<CR>
+endfunction
+
+function! SetHaxe()
+	nnoremap <leader>l :!sh build.sh run<CR>
 endfunction
 
 function! SetLove()
@@ -201,7 +201,7 @@ command! -bang -nargs=? -complete=dir Files
 let g:fzf_layout = {'down': '50%'}
 
 autocmd FileType lua call SetLove()
-autocmd BufEnter *.cmake,CMakeLists.txt,*.cmake.in :RainbowToggle
+autocmd BufNewFile,BufRead *.hx call SetHaxe()
 autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()
 autocmd BufNewFile,BufRead *.java call SetJava()

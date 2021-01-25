@@ -236,6 +236,7 @@ exec --no-startup-id mpd &
 exec --no-startup-id NetworkManager &
 exec --no-startup-id rofi -show &
 exec --no-startup-id /usr/lib/kdeconnectd &
+exec_always --no-startup-id pulseaudio &
 exec_always --no-startup-id conky &
 exec_always --no-startup-id dunst &
 exec_always --no-startup-id picom --config /home/brbl/.config/picom/picom.conf
