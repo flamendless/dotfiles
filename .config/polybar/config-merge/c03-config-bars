@@ -2,14 +2,16 @@
 inherit="bar/base_floating"
 monitor = ${env:MONITOR:}
 ;modules-center = cava clock playerctl_long
-modules-center = cava
-modules-left = floating_popup_button pavucontrol_button
-modules-right = sensors_cpu_pc memory
+;modules-center = cava
+
+modules-center = i3_dots
+modules-left = floating_popup_button
+modules-right = clock battery_short xbacklight
 
 [bar/floating_popup]
 inherit="bar/base_floating_popup"
 monitor = ${env:MONITOR:}
-modules-left = disk_short_pc eth_pc
+modules-left = memory disk_short_pc wlan_short
 
 [bar/floating_wm]
 inherit="bar/base_floating_wm"

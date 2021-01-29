@@ -18,7 +18,7 @@ date =
 date-alt =%d.%m.%Y
 time =" %H:%M"
 time-alt =%H:%M:%S,
-label =%time% %date% 
+label =%time% %date% 󰥔
 
 [module/clock_icon]
 inherit = "module/clock"
@@ -76,18 +76,18 @@ click-left = "setsid termite -e sh -c htop"
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3
 format-connected = <label-connected>
 label-connected = %ifname%: %local_ip% [%essid%]
 
 [module/wlan_short]
 inherit="module/wlan"
-label-connected = %essid%
+label-connected = %essid% 󰖩
 
 [module/eth_pc]
 type = internal/network
-interface = wlp3s0
+interface = eth0
 interval = 3
 format-connected = <label-connected>
 label-connected = 󰈀 %local_ip%
@@ -192,9 +192,9 @@ label-discharging = bat: %percentage%% (-%consumption%W, %time%)
 
 [module/battery_short]
 inherit = "module/battery"
-label-full = bat: %percentage%%
-label-charging = bat: %percentage%%
-label-discharging = bat: %percentage%%
+label-full = bat: %percentage%% 󰁹
+label-charging = bat: %percentage%% 󰂄
+label-discharging = bat: %percentage%% 󰂃
 
 ; Module Disk
 
@@ -220,7 +220,7 @@ exec = echo $(df -h / | tail +2 | awk -F ' ' '{print $3 " / " $2 " (" $5 ")"}' |
 [module/xbacklight]
 type = internal/xbacklight
 format = <label>
-label = %percentage% 
+label = %percentage% 󰌵
 
 [module/xbacklight_buttons]
 type = custom/menu

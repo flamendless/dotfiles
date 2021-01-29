@@ -38,7 +38,7 @@ sleep 1
 ######################
 # Launch programs used by modules
 #
-setsid ~/.config/polybar/scripts/hideIt.sh --wait --region 0x1080+1920+-10 --name '^polybar-floating_LVDS-1$' > /dev/null 2>&1 & 
+setsid ~/.config/polybar/scripts/hideIt.sh --wait --region 0x800+1280+-10 --name '^polybar-floating_LVDS1$' > /dev/null 2>&1 &
 #
 # Hide floating_sysinfo polybar and reset popup state
 (xdo id -m -N Polybar && polybar-msg -p $(ps -ef | grep floating_sysinfo | grep -v grep | awk '{print $2}') cmd hide)  > /dev/null 2>&1 &
