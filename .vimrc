@@ -163,6 +163,13 @@ function! SetLove()
 	endif
 endfunction
 
+function! SetCPP()
+	if filereadable("xmake.lua")
+		nnoremap <leader>l :!xmake run<CR>
+		nnoremap <leader>c :!xmake<CR>
+	endif
+endfunction
+
 function! StatusLine(current, width)
   return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
         \ . ' %f%h%w%m%r '
@@ -201,6 +208,7 @@ command! -bang -nargs=? -complete=dir Files
 let g:fzf_layout = {'down': '50%'}
 
 autocmd FileType lua call SetLove()
+autocmd BufNewFile,BufRead *.cpp call SetCPP()
 autocmd BufNewFile,BufRead *.hx call SetHaxe()
 autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()

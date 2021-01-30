@@ -26,7 +26,7 @@ bash ~/.config/polybar/config-merge/config-merge.sh  ~/.config/polybar/config
 # Launch polybar(s)
 #
 polybar floating -r -l warning &
-polybar floating_wm -r -l warning &
+# polybar floating_wm -r -l warning &
 polybar floating_popup -r -l warning &
 #
 #polybar pc_vnc_landscape -r -l warning &

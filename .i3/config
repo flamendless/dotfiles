@@ -240,6 +240,7 @@ exec_always --no-startup-id pulseaudio &
 exec_always --no-startup-id conky &
 exec_always --no-startup-id dunst &
 exec_always --no-startup-id picom --config /home/brbl/.config/picom/picom.conf
+exec_always --no-startup-id .config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg
 exec_always --no-startup-id $HOME/bin/polybar.sh
 
@@ -250,6 +251,8 @@ for_window [instance="notorious"] resize set 360 360
 for_window [instance="gnome-calculator"] floating enable
 for_window [instance="feh"] floating enable
 for_window [instance="feh"] move position center
+for_window [instance="CodeNect"] floating enable
+for_window [instance="CodeNect"] move position center
 
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks

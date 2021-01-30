@@ -286,7 +286,7 @@ date =
 date-alt =%d.%m.%Y
 time =" %H:%M"
 time-alt =%H:%M:%S,
-label =%time% %date% 
+label =%time% %date% 󰥔
 
 [module/clock_icon]
 inherit = "module/clock"
@@ -351,7 +351,7 @@ label-connected = %ifname%: %local_ip% [%essid%]
 
 [module/wlan_short]
 inherit="module/wlan"
-label-connected = %essid%
+label-connected = %essid% 󰖩
 
 [module/eth_pc]
 type = internal/network
@@ -460,9 +460,9 @@ label-discharging = bat: %percentage%% (-%consumption%W, %time%)
 
 [module/battery_short]
 inherit = "module/battery"
-label-full = bat: %percentage%%
-label-charging = bat: %percentage%%
-label-discharging = bat: %percentage%%
+label-full = bat: %percentage%% 󰁹
+label-charging = bat: %percentage%% 󰂄
+label-discharging = bat: %percentage%% 󰂃
 
 ; Module Disk
 
