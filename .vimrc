@@ -166,7 +166,7 @@ endfunction
 function! SetCPP()
 	if filereadable("xmake.lua")
 		nnoremap <leader>l :!xmake run<CR>
-		nnoremap <leader>c :!xmake<CR>
+		nnoremap <leader>c :!bear -- xmake<CR>
 	endif
 endfunction
 
