@@ -51,6 +51,7 @@ set cc=88
 " set tw=88
 set fo+=t
 set smartcase
+set ignorecase
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
@@ -101,6 +102,7 @@ sunmap e
 map <S-k> <Nop>
 " imap <leader>f <C-x><C-f>
 map <C-a> <esc>ggVG<CR>
+nnoremap <leader>o <C-w>o
 nnoremap <leader>b :bprevious<CR>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -127,7 +129,7 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build|node_modules',
   \ 'file': '\v\.(exe|dll)$',
   \ }
 
@@ -165,7 +167,8 @@ endfunction
 
 function! SetCPP()
 	if filereadable("xmake.lua")
-		nnoremap <leader>l :!xmake run<CR>
+		nnoremap <leader>r :!xmake run<CR>
+		nnoremap <leader>l :!bear -- xmake && xmake run<CR>
 		nnoremap <leader>c :!bear -- xmake<CR>
 	endif
 endfunction
