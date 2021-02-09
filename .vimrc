@@ -266,8 +266,7 @@ function! s:show_documentation()
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
-" append result on current expression
-nmap <Leader>ca <Plug>(coc-calc-result-append)
-" replace result on current expression
+nmap <Leader>cb <Plug>(coc-codeaction)
+nmap <Leader>ca <Plug>(coc-codeaction-selected)
 nmap <Leader>cr <Plug>(coc-calc-result-replace)
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>

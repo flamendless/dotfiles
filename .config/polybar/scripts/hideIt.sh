@@ -28,6 +28,7 @@ STATUSFILE="$HOME/.config/polybar/scripts/.polypopup.floating_popup"
 
 WIN_ID=""
 WIN_NAME_MOVEALONG_ONE='^Polybar tray window$'
+WIN_OFFSETY_MOVEALONG=6
 WIN_ID_MOVEALONG_ONE=
 WIN_NAME=""
 WIN_CLASS=""
@@ -53,7 +54,7 @@ SIGNAL=1
 INTERVAL=0.2
 PEEK=0
 DIRECTION="bottom"
-STEPS=3
+STEPS=10
 NO_TRANS=1
 TOGGLE=1
 TOGGLE_PEEK=1
@@ -430,7 +431,7 @@ function winmove() {
     # Tray
     #echo "WIN_ID_MOVEALONG_ONE $WIN_ID_MOVEALONG_ONE"
     #xdotool windowmove $WIN_ID_MOVEALONG_ONE $1 $2
-    xdotool 2>/dev/null 1>&2 windowmove $WIN_ID_MOVEALONG_ONE $WIN_POSX_MOVEALONG_ONE $(($2 + 4))
+    xdotool 2>/dev/null 1>&2 windowmove $WIN_ID_MOVEALONG_ONE $WIN_POSX_MOVEALONG_ONE $(($2 + $WIN_OFFSETY_MOVEALONG))
 
 }
 
@@ -598,10 +599,10 @@ function serve_region() {
             fi
 
             # Don't hide if the cursor is still above the window
-            if [ $_IS_HIDDEN -ne 0 ] &&
-                [ $_hide -eq 0 ] &&
-                [ $WINDOW -eq $WIN_ID ]; then
-                _hide=1
+			if [ $_IS_HIDDEN -ne 0 ] && [ $_hide -eq 0 ] ; then
+                if [ $WINDOW -eq $WIN_ID ] || [ $WINDOW -eq $WIN_ID_MOVEALONG_ONE ] ; then
+                    _hide=1
+                fi
             fi
 
             # Only do something if necessary
