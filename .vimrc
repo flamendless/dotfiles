@@ -165,6 +165,12 @@ function! SetLove()
 	endif
 endfunction
 
+function! SetC()
+	if filereadable("Makefile")
+		nnoremap <leader>l :make<CR>
+	endif
+endfunction
+
 function! SetCPP()
 	if filereadable("xmake.lua")
 		nnoremap <leader>r :!xmake run<CR>
@@ -211,7 +217,9 @@ command! -bang -nargs=? -complete=dir Files
 let g:fzf_layout = {'down': '50%'}
 
 autocmd FileType lua call SetLove()
+autocmd BufNewFile,BufRead *.c call SetC()
 autocmd BufNewFile,BufRead *.cpp call SetCPP()
+autocmd BufNewFile,BufRead *.hpp call SetCPP()
 autocmd BufNewFile,BufRead *.hx call SetHaxe()
 autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()
@@ -251,9 +259,10 @@ inoremap <silent><expr> <c-@> coc#refresh()
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -266,7 +275,8 @@ function! s:show_documentation()
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
+nmap <Leader>gh :CocCommand clangd.switchSourceHeader<CR>
 nmap <Leader>cb <Plug>(coc-codeaction)
-nmap <Leader>ca <Plug>(coc-codeaction-selected)
+nmap <Leader>ca <Plug>(coc-codeaction-selected)<CR>
 nmap <Leader>cr <Plug>(coc-calc-result-replace)
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
