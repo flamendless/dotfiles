@@ -73,6 +73,8 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'morhetz/gruvbox'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
 Plug 'jdonaldson/vaxe', { 'for': 'haxe' }
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'preservim/tagbar'
 call plug#end()
 
 colorscheme gruvbox
@@ -112,7 +114,8 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>r :so $MYVIMRC<CR>
 nnoremap <leader>s :Rg <C-r><C-w><CR>
 " inoremap <expr> <leader>f fzf#vim#complete#path('rg --files')
-
+nnoremap <leader>t :CtrlPTag<cr>
+nmap <F8> :TagbarToggle<CR>
 
 " GO TO VIM ULITMATE LEARNING EXPERIENCE!
 " noremap  <Up> ""
@@ -172,9 +175,9 @@ function! SetC()
 endfunction
 
 function! SetCPP()
-	if filereadable("xmake.lua")
-		nnoremap <leader>r :!xmake run<CR>
-		nnoremap <leader>l :!xmake project -k ninja && xmake project -k compile_commands && ninja && xmake run<CR>
+	if filereadable("build.sh")
+		nnoremap <leader>r :!sh build.sh run<CR>
+		nnoremap <leader>l :!sh build.sh compile && sh build.sh run<CR>
 	endif
 endfunction
 

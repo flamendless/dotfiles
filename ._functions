@@ -160,3 +160,9 @@ $ ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4";
 find_largest() {
 	find . -type f -size +20M -exec ls -lh {} \; | awk '{ print $NF ": " $5 }'
 }
+
+stopwatch() {
+	date1=`date +%s`; while true; do
+		echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
+	done
+}
