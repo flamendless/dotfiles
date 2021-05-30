@@ -58,8 +58,7 @@ workspace_auto_back_and_forth no
 force_display_urgency_hint 0 ms
 focus_on_window_activation urgent
 
-floating_minimum_size 640 x 480
-floating_maximum_size 1280 x 720
+floating_maximum_size 1280 x 800
 
 font pango:Hack, FontAwesome 12
 
