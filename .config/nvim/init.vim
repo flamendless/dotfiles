@@ -14,7 +14,7 @@ set encoding=UTF-8
 set iskeyword-=.
 set incsearch
 set nohlsearch
-set completeopt=longest,menuone
+set completeopt=longest,menuone,noselect
 set shortmess+=c
 set noet ci pi sts=4 sw=4 ts=4
 set wrap
