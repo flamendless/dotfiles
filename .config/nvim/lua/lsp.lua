@@ -9,7 +9,6 @@ require'lspconfig'.clangd.setup {
 require'lspconfig'.sumneko_lua.setup {
 	on_attach=on_attach,
 	rootPatterns = {".git"},
-	cmd = {};
 	cmd = {
 		"/home/brbl/Softwares/lua-language-server/bin/Linux/lua-language-server",
 		"-E",
@@ -18,16 +17,16 @@ require'lspconfig'.sumneko_lua.setup {
 	filetypes = { "lua", "lua2p" },
 	settings = {
 		Lua = {
+			telemetry = {
+				enable = false,
+			},
 			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 				version = 'LuaJIT',
-				-- Setup your lua path
-				path = vim.split(package.path, ';'),
 			},
 			diagnostics = {
 				enable = true,
-				globals = {"love"},
-				disable = {"uppercase-global"},
+				globals = {"love", "vim", "if", "end", "then", "!"},
+				disable = {"lowercase-global"},
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
@@ -37,6 +36,9 @@ require'lspconfig'.sumneko_lua.setup {
 				},
 				ignoreDir = {".vscode", ".git"}
 			},
+			completion = {
+				keywordSnippet = "Disable"
+			}
 		},
 		files = {
 			associations = {
