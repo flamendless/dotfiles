@@ -75,6 +75,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'liuchengxu/eleline.vim'
+Plug 'ap/vim-buftabline'
 call plug#end()
 
 colorscheme gruvbox
