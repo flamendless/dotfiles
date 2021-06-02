@@ -1,9 +1,39 @@
-local function on_attach()
+local function on_attach(_, bufnr)
+	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	local opts = { noremap=true, silent=true }
+	buf_set_keymap('n', '<space>gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+	buf_set_keymap('n', '<space>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+end
+
+local function switch_source_header_splitcmd(bufnr, splitcmd)
+    bufnr = require'lspconfig'.util.validate_bufnr(bufnr)
+    local params = { uri = vim.uri_from_bufnr(bufnr) }
+    vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params, function(err, _, result)
+        if err then error(tostring(err)) end
+        if not result then print ("Corresponding file can’t be determined") return end
+        vim.api.nvim_command(splitcmd..' '..vim.uri_to_fname(result))
+    end)
 end
 
 require'lspconfig'.clangd.setup {
     on_attach = on_attach,
-    root_dir = function() return vim.loop.cwd() end
+    root_dir = function() return vim.loop.cwd() end,
+	commands = {
+    	ClangdSwitchSourceHeader = {
+    		function() switch_source_header_splitcmd(0, "edit") end;
+    		description = "Open source/header in current buffer";
+    	},
+    	ClangdSwitchSourceHeaderVSplit = {
+    		function() switch_source_header_splitcmd(0, "vsplit") end;
+    		description = "Open source/header in a new vsplit";
+    	},
+    	ClangdSwitchSourceHeaderSplit = {
+    		function() switch_source_header_splitcmd(0, "split") end;
+    		description = "Open source/header in a new split";
+    	}
+    }
 }
 
 require'lspconfig'.sumneko_lua.setup {
@@ -17,11 +47,16 @@ require'lspconfig'.sumneko_lua.setup {
 	filetypes = { "lua", "lua2p" },
 	settings = {
 		Lua = {
+			develop = {
+				enable = true,
+			},
 			telemetry = {
 				enable = false,
 			},
 			runtime = {
 				version = 'LuaJIT',
+				path = vim.split(package.path, ';'),
+				plugin = "/home/brbl/.config/nvim/lua/plugin.lua",
 			},
 			diagnostics = {
 				enable = true,
@@ -54,7 +89,6 @@ local opts = {
     -- or you just hate the highlight
     -- default: true
     highlight_hovered_item = false,
-
     -- whether to show outline guides
     -- default: true
     show_guides = true,
@@ -66,9 +100,9 @@ require'compe'.setup {
   enabled = true;
   autocomplete = true;
   debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
+  min_length = 0;
+  preselect = 'disable';
+  throttle_time = 20;
   source_timeout = 200;
   incomplete_delay = 400;
   max_abbr_width = 100;
@@ -102,8 +136,6 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
@@ -113,8 +145,6 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
   else
     -- If <S-Tab> is not working in your terminal, change it to <C-h>
     return t "<S-Tab>"

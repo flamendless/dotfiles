@@ -70,6 +70,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/tagbar'
+Plug 'vim-scripts/AnsiEsc.vim'
 call plug#end()
 
 lua require("lsp")
@@ -116,6 +117,8 @@ nnoremap <leader>r :so $MYVIMRC<CR>
 nnoremap <leader>s :Rg <C-r><C-w><CR>
 nnoremap <leader>t :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
+nmap <F9> :SymbolsOutline<CR>
+nnoremap gh :ClangdSwitchSourceHeader<CR>
 
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'

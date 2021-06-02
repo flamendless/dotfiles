@@ -64,16 +64,17 @@ Plug 'xolox/vim-misc'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'rbong/vim-crystalline'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'bkad/CamelCaseMotion'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/tagbar'
+Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'liuchengxu/eleline.vim'
 call plug#end()
 
 colorscheme gruvbox
@@ -135,9 +136,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|dll)$',
   \ }
 
-let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_tabline_fn = 'TabLine'
-let g:crystalline_theme = 'molokai'
 let maplocalleader="\<space>"
 
 function! SetPython()
@@ -180,18 +178,6 @@ function! SetCPP()
 	endif
 endfunction
 
-function! StatusLine(current, width)
-  return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
-        \ . ' %f%h%w%m%r '
-        \ . (a:current ? '%#CrystallineFill#' : '')
-        \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
-        \ . (a:width > 80 ? ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P ' : ' ')
-endfunction
-
-function! TabLine()
-  let l:vimlabel = has("nvim") ?  " NVIM " : " VIM "
-  return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab# ' . l:vimlabel
-endfunction
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -266,7 +252,7 @@ nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
     call CocActionAsync('doHover')

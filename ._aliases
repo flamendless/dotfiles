@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-alias vim='nvim'
+# alias vim='nvim'
 alias i3config='vim ~/.i3/config'
 alias polybarconf='vim ~/.config/polybar/config'
-# alias vimrc='vim ~/.vimrc'
-alias nvimrc='vim ~/.config/nvim/init.vim'
+alias vimrc='vim ~/.vimrc'
+# alias nvimrc='vim ~/.config/nvim/init.vim'
 alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
 alias preztorc='vim ~/.zpreztorc'

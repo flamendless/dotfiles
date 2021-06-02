@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/brbl/Projects/GoingHomeRevisited/src/states'
+let g:netrw_dirhist_1='/home/brbl/Documents/4-1/Thesis/tex/sections/chapter3'
+let g:netrw_dirhist_0='/home/brbl/Documents/4-1/Thesis/tex/sections/chapter1'
+let g:netrw_dirhist_9='/home/brbl/Development/tutoring/direct/jonny-connect-n'
+let g:netrw_dirhist_8='/home/brbl/Projects/CodeNect/.cache'
+let g:netrw_dirhist_7='/home/brbl/Projects/CodeNect'
+let g:netrw_dirhist_6='/home/brbl/Projects/CodeNect/includes/better-enums'
+let g:netrw_dirhist_5='/home/brbl/Development/tutoring/direct/jonny-connect-n'
+let g:netrw_dirhist_4='/home/brbl/Development/tutoring/direct/jonny-matrix-add'
+let g:netrw_dirhist_3='/home/brbl/Development/tutoring/direct/jonny-pascal'
