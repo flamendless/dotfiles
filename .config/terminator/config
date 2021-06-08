@@ -6,7 +6,8 @@
     background_color = "#282828"
     background_darkness = 0.8
     background_type = transparent
-    cursor_color = "#aaaaaa"
+    cursor_color = "#57e389"
+    cursor_color_fg = False
     font = FiraCode Nerd Font Mono 11
     foreground_color = "#ebdbb2"
     show_titlebar = False

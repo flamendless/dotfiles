@@ -142,6 +142,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 let maplocalleader="\<space>"
+let g:buftabline_indicators = 1
 
 function! SetPython()
 	nnoremap <leader>l :!python %<CR>
