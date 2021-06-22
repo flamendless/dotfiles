@@ -80,6 +80,7 @@ Plug 'preservim/tagbar'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'liuchengxu/eleline.vim'
 Plug 'ap/vim-buftabline'
+Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
 colorscheme gruvbox
@@ -137,7 +138,7 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build|node_modules',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build|node_modules|new_assets',
   \ 'file': '\v\.(exe|dll)$',
   \ }
 
@@ -160,10 +161,17 @@ function! SetHaxe()
 	nnoremap <leader>l :!sh build.sh run<CR>
 endfunction
 
+function! CheckLua()
+	exec "!./build.sh check vim ".
+		\ expand('%:p:h:t')."/".
+		\ expand('%:t:r').".lua"
+endfunction
+
 function! SetLove()
 	if filereadable("build.sh")
 		nnoremap <leader>l :!sh build.sh run &&<CR>
 		nnoremap <leader>c :!sh build.sh rebuild &&<CR>
+		autocmd BufWritePost *.lua2p exec CheckLua()
 	elseif filereadable("Makefile")
 		nnoremap <leader>l :!make &&<CR>
 	else
@@ -218,7 +226,7 @@ autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()
 autocmd BufNewFile,BufRead *.java call SetJava()
 autocmd BufRead,BufNewFile *.lua2p setfiletype lua
-autocmd BufNewFile,BufRead *.lua2p call SetLove()
+" autocmd BufNewFile,BufRead *.lua2p call SetLove()
 autocmd BufNewFile,BufRead *.lua2p set syntax=lua
 autocmd BufNewFile,BufRead *.lua2p set commentstring=--\ %s
 autocmd BufNewFile,BufRead *.log :AnsiEsc
