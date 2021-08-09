@@ -73,6 +73,7 @@ client.background       $black
 floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id exec $term
 bindsym $mod+Shift+w exec --no-startup-id exec $browser
+bindsym $mod+Shift+s exec --no-startup-id exec simplescreenrecorder
 bindsym $mod+Shift+f exec $filemanager
 bindsym $mod+Shift+a exec xfce4-appfinder
 bindsym $mod+q kill

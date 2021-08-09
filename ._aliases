@@ -42,6 +42,7 @@ alias gA='git add -A'
 alias gC='git commit -m'
 alias gU='git pull'
 alias gP='git push'
+alias gCP='git log --name-status -2'
 
 alias clear_screenshots='rm -rf ~/temp/screenshots && mkdir -p ~/temp/screenshots'
 alias v='vim $(fzf)'

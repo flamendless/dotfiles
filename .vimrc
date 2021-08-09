@@ -62,7 +62,6 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 call plug#begin()
-Plug 'tpope/vim-eunuch'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'xolox/vim-misc'
 Plug 'ntpeters/vim-better-whitespace'
@@ -144,6 +143,7 @@ let g:ctrlp_custom_ignore = {
 
 let maplocalleader="\<space>"
 let g:buftabline_indicators = 1
+let g:lua_syntax_nostdlib = 1
 
 function! SetPython()
 	nnoremap <leader>l :!python %<CR>
@@ -157,8 +157,11 @@ function! SetJava()
 	nnoremap <leader>l :!javac % && java %:r<CR>
 endfunction
 
-function! SetHaxe()
-	nnoremap <leader>l :!sh build.sh run<CR>
+function! RunAndCheckLua()
+	exec "!sh build.sh run && ".
+		\ "sh build.sh check vim ".
+		\ expand('%:p:h:t')."/".
+		\ expand('%:t:r').".lua"
 endfunction
 
 function! CheckLua()
@@ -169,9 +172,12 @@ endfunction
 
 function! SetLove()
 	if filereadable("build.sh")
-		nnoremap <leader>l :!sh build.sh run &&<CR>
+		" nnoremap <leader>l :!sh build.sh run &&<CR>
+		nnoremap <leader>l :call RunAndCheckLua()<CR>
 		nnoremap <leader>c :!sh build.sh rebuild &&<CR>
-		autocmd BufWritePost *.lua2p exec CheckLua()
+		nnoremap <leader>p :!sh build.sh profile &&<CR>
+		nnoremap <leader>w :!sh build.sh run > /dev/null 2>&1 &<CR>
+		" autocmd BufWritePost *.lua2p exec CheckLua()
 	elseif filereadable("Makefile")
 		nnoremap <leader>l :!make &&<CR>
 	else
@@ -221,7 +227,6 @@ autocmd FileType lua call SetLove()
 autocmd BufNewFile,BufRead *.c call SetC()
 autocmd BufNewFile,BufRead *.cpp call SetCPP()
 autocmd BufNewFile,BufRead *.hpp call SetCPP()
-autocmd BufNewFile,BufRead *.hx call SetHaxe()
 autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()
 autocmd BufNewFile,BufRead *.java call SetJava()
