@@ -248,6 +248,8 @@ exec_always --no-startup-id $HOME/bin/polybar.sh
 
 bindsym --release $mod+Shift+q exec xkill
 
+for_window [instance="simplescreenrecorder"] floating enable
+for_window [instance="simplescreenrecorder"] move position center
 for_window [instance="feh"] floating enable
 for_window [instance="feh"] move position center
 for_window [instance="CodeNect"] floating enable

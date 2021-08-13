@@ -80,6 +80,7 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'liuchengxu/eleline.vim'
 Plug 'ap/vim-buftabline'
 Plug 'tikhomirov/vim-glsl'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 colorscheme gruvbox
@@ -100,6 +101,18 @@ nnoremap L $
 nnoremap ss ciw
 nnoremap j gj
 nnoremap k gk
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+inoremap [ [<c-g>u
+inoremap ] ]<c-g>u
+inoremap ( (<c-g>u
+inoremap ) )<c-g>u
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
