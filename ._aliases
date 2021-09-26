@@ -13,6 +13,7 @@ alias zshreload='source ~/.zshrc'
 alias aliases='vim ~/._aliases'
 alias functions='vim ~/._functions'
 alias aseprite='~/Aseprite/aseprite-source/build/bin/aseprite'
+alias aseprite3='~/Aseprite/aseprite-beta/build/bin/aseprite'
 
 alias cls='clear'
 alias count='ls -1|wc -l'

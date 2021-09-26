@@ -81,6 +81,7 @@ Plug 'liuchengxu/eleline.vim'
 Plug 'ap/vim-buftabline'
 Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/vim-cursorword'
 call plug#end()
 
 colorscheme gruvbox
@@ -126,6 +127,7 @@ nnoremap <leader>o <C-w>o
 nnoremap <leader>b :bprevious<CR>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>w :bw<CR>
 nnoremap <space>v :vsplit<CR>
 nnoremap <space>h :split<CR>
 cmap w!! w !sudo tee % >/dev/null
@@ -183,19 +185,25 @@ function! CheckLua()
 		\ expand('%:t:r').".lua"
 endfunction
 
+function! GetLoveDocs()
+	let funcUnderCursor = expand("<cexpr>")
+	let expr = "help love-" . funcUnderCursor
+	execute expr
+endfunction
+
 function! SetLove()
 	if filereadable("build.sh")
 		" nnoremap <leader>l :!sh build.sh run &&<CR>
 		nnoremap <leader>l :call RunAndCheckLua()<CR>
 		nnoremap <leader>c :!sh build.sh rebuild &&<CR>
 		nnoremap <leader>p :!sh build.sh profile &&<CR>
-		nnoremap <leader>w :!sh build.sh run > /dev/null 2>&1 &<CR>
 		" autocmd BufWritePost *.lua2p exec CheckLua()
 	elseif filereadable("Makefile")
 		nnoremap <leader>l :!make &&<CR>
 	else
 		nnoremap <leader>l :!love . &&<CR>
 	endif
+	nnoremap <leader>k :call GetLoveDocs()<CR>
 endfunction
 
 function! SetC()
