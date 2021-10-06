@@ -74,7 +74,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'gruvbox-community/gruvbox'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c++', 'cpp']}
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'liuchengxu/eleline.vim'
@@ -82,6 +82,7 @@ Plug 'ap/vim-buftabline'
 Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 colorscheme gruvbox
