@@ -2,7 +2,7 @@
 set $mod Mod4
 set $editor terminator
 set $term terminator
-set $filemanager thunar
+set $filemanager pcmanfm
 set $browser firefox
 
 set_from_resource $darkred     color1  #000000

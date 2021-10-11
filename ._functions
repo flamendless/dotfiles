@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+kde_send_file() {
+	if [ $# -ne 1 ]; then
+		echo "arg1 is file"
+	else
+		kdeconnect-cli --share "$1" -n flamendless@huawei
+	fi
+}
+
+apk_align_sign() {
+	if [ $# -ne 3 ]; then
+		echo "arg1 is apk; arg2 is keystore file; arg3 is output apk"
+	else
+		sudo zipalign -v -p 4 "$1" "$1-aligned.apk"
+		sudo apksigner sign --ks "$2" --out "$3" "$1-aligned.apk"
+	fi
+}
+
 apk_sign() {
 	if [ $# -eq 0 ]; then
 		echo "arg1 is apk name; arg2 is keystore file;"
@@ -35,7 +52,7 @@ apk_decompile() {
 }
 
 love_zip() {
-	noglob zip -9rv game.love . -x *.git* *.md* *.txt* *.rst* *docs/* *.ase* *.swp* *spec/* *test/* *rockspec* *.mak* *.yml* *ctags* *Makefile*;
+	noglob zip -9rv game.love . -x *.git* *.md* *.txt* *.rst* *docs/* *.ase* *.swp* *spec/* *test/* *rockspec* *.mak* *.yml* *ctags* *Makefile* *makelove-build* *makelove.toml*;
 }
 
 count_lines() {

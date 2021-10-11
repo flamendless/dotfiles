@@ -64,4 +64,3 @@ alias wifi_connect='nmcli con up'
 alias wifi_disconnect='nmcli con down'
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias obs2='LIBGL_ALWAYS_SOFTWARE=1 obs'
