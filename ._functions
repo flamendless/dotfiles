@@ -17,7 +17,7 @@ apk_align_sign() {
 			sudo rm $apk_aligned;
 			echo "deleted $apk_aligned"
 		fi
-		sudo zipalign -p 4 "$1" $apk_aligned
+		sudo zipalign -p 4 "$1" $apk_aligned &&
 		sudo apksigner sign --ks "$2" --out "$3" $apk_aligned
 	fi
 }

@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-# alias vim='nvim'
 alias i3config='vim ~/.i3/config'
 alias polybarconf='vim ~/.config/polybar/config'
 alias vimrc='vim ~/.vimrc'
-# alias nvimrc='vim ~/.config/nvim/init.vim'
 alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
 alias preztorc='vim ~/.zpreztorc'
@@ -46,7 +44,6 @@ alias gP='git push'
 alias gCP='git log --name-status -2'
 
 alias clear_screenshots='rm -rf ~/temp/screenshots && mkdir -p ~/temp/screenshots'
-alias v='vim $(fzf)'
 alias untargz='tar xvzf'
 
 alias safe_upgrade='sudo pacman -Syu'
@@ -56,9 +53,6 @@ alias start_apache='sudo /opt/lampp/lampp startapache'
 
 alias start_mysql='sudo /opt/lampp/lampp startmysql'
 alias stop_mysql='sudo /opt/lampp/lampp stopmysql'
-
-alias stop_mssql='sudo systemctl stop mssql-server.service'
-alias start_mssql='sudo systemctl start mssql-server.service'
 
 alias wifi_connect='nmcli con up'
 alias wifi_disconnect='nmcli con down'
