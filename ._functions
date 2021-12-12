@@ -113,7 +113,7 @@ batch_rename_jpeg() {
 
 png_to_timelapse() {
 	if [ $# -ne 0 ]; then
-		ffmpeg -framerate "$1" -pattern_type glob -i "*.png" output.mkv;
+		ffmpeg -framerate "$1" -pattern_type glob -i "*.png" output.mp4;
 	else
 		echo "arg1 is framerate (default=24);"
 	fi

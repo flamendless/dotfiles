@@ -240,6 +240,7 @@ exec --no-startup-id /usr/lib/kdeconnectd &
 exec_always --no-startup-id pulseaudio &
 exec_always --no-startup-id conky &
 exec_always --no-startup-id dunst &
+exec_always --no-startup-id clipit &
 exec_always --no-startup-id picom --config /home/brbl/.config/picom/picom.conf
 exec_always --no-startup-id .config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg
