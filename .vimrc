@@ -128,7 +128,6 @@ nnoremap <leader>o <C-w>o
 nnoremap <leader>b :bprevious<CR>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <leader>w :bw<CR>
 nnoremap <space>v :vsplit<CR>
 nnoremap <space>h :split<CR>
 cmap w!! w !sudo tee % >/dev/null
@@ -173,8 +172,15 @@ function! SetJava()
 	nnoremap <leader>l :!javac % && java %:r<CR>
 endfunction
 
-function! RunAndCheckLua()
-	exec "!sh build.sh run && ".
+function! RunAndCheckLua(os)
+	if a:os == "linux"
+		let filename = "build.sh"
+	elseif a:os == "windows"
+		let filename = "build_win.sh"
+	endif
+
+	exec "!sh ".filename.
+		\ " run && ".
 		\ "sh build.sh check vim ".
 		\ expand('%:p:h:t')."/".
 		\ expand('%:t:r').".lua"
@@ -195,7 +201,8 @@ endfunction
 function! SetLove()
 	if filereadable("build.sh")
 		" nnoremap <leader>l :!sh build.sh run &&<CR>
-		nnoremap <leader>l :call RunAndCheckLua()<CR>
+		nnoremap <leader>l :call RunAndCheckLua("linux")<CR>
+		nnoremap <leader>w :call RunAndCheckLua("windows")<CR>
 		nnoremap <leader>c :!sh build.sh rebuild &&<CR>
 		nnoremap <leader>p :!sh build.sh profile &&<CR>
 		" autocmd BufWritePost *.lua2p exec CheckLua()
@@ -308,3 +315,11 @@ nmap <Leader>cb <Plug>(coc-codeaction)
 nmap <Leader>ca <Plug>(coc-codeaction-selected)<CR>
 nmap <Leader>cr <Plug>(coc-calc-result-replace)
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
