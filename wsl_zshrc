@@ -1,0 +1,35 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+export PATH=~/.local/bin:$PATH
+export EDITOR=vim
+export KEYTIMEOUT=1
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
+export DATABASE_URL=postgres://saleor:saleor@localhost:5432/smopbe
+export ALLOWED_HOSTS="localhost, develop.smop.asia, *"
+
+# For WSL setup
+alias cdwin="cd /mnt/c/Users/user/Desktop"
+alias clip.exe=/mnt/c/Windows/System32/clip.exe
+
+alias mv="mv -iv"
+alias cp="cp -iv"
+alias rm="rm -iv"
+alias cls="clear"
+alias ls="exa"
+alias la="exa -la"
+alias zshrc="vim /home/flamendless/.zshrc"
+alias vimrc="vim /home/flamendless/.vimrc"
+alias reload="source ~/.zshrc"
+alias cat="bat"
+alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
