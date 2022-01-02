@@ -68,7 +68,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim', {'do': {-> fzf#install()}}
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'bkad/CamelCaseMotion'
@@ -83,6 +83,7 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot'
+Plug 'szw/vim-maximizer'
 call plug#end()
 
 colorscheme gruvbox
@@ -136,6 +137,7 @@ nnoremap <leader>s :Rg <C-r><C-w><CR>
 " inoremap <expr> <leader>f fzf#vim#complete#path('rg --files')
 nnoremap <leader>t :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
+nnoremap <leader>m :MaximizerToggle!<CR>
 
 " GO TO VIM ULITMATE LEARNING EXPERIENCE!
 " noremap  <Up> ""
@@ -172,15 +174,8 @@ function! SetJava()
 	nnoremap <leader>l :!javac % && java %:r<CR>
 endfunction
 
-function! RunAndCheckLua(os)
-	if a:os == "linux"
-		let filename = "build.sh"
-	elseif a:os == "windows"
-		let filename = "build_win.sh"
-	endif
-
-	exec "!sh ".filename.
-		\ " run && ".
+function! RunAndCheckLua()
+	exec "!sh build.sh run && ".
 		\ "sh build.sh check vim ".
 		\ expand('%:p:h:t')."/".
 		\ expand('%:t:r').".lua"
@@ -201,8 +196,7 @@ endfunction
 function! SetLove()
 	if filereadable("build.sh")
 		" nnoremap <leader>l :!sh build.sh run &&<CR>
-		nnoremap <leader>l :call RunAndCheckLua("linux")<CR>
-		nnoremap <leader>w :call RunAndCheckLua("windows")<CR>
+		nnoremap <leader>l :call RunAndCheckLua()<CR>
 		nnoremap <leader>c :!sh build.sh rebuild &&<CR>
 		nnoremap <leader>p :!sh build.sh profile &&<CR>
 		" autocmd BufWritePost *.lua2p exec CheckLua()
