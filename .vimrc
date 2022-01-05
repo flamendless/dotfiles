@@ -149,6 +149,7 @@ nnoremap <leader>m :MaximizerToggle!<CR>
 " noremap  <Right> ""
 " noremap! <Right> <Esc>
 
+let g:tagbar_map_showproto="<C-s>" "allow <leader><leader> when in tagbar
 let g:LanguageClient_autoStart = 1
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'
