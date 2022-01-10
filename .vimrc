@@ -215,6 +215,8 @@ function! SetLua()
 	hi link luaSymbolOperator GruvboxOrange
 	hi link luaParens GruvboxOrange
 	hi link luaFuncParens GruvboxOrange
+	syn match luaBuiltIn ":"
+	syn match luaBuiltIn "\."
 endfunction
 
 function! SetLua2p()
