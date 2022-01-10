@@ -72,7 +72,6 @@ Plug 'junegunn/fzf.vim', {'do': {-> fzf#install()}}
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'bkad/CamelCaseMotion'
-Plug 'gruvbox-community/gruvbox'
 Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c++', 'cpp']}
 Plug 'preservim/tagbar'
@@ -84,6 +83,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot'
 Plug 'szw/vim-maximizer'
+
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 colorscheme gruvbox
@@ -209,6 +210,23 @@ function! SetLove()
 	nnoremap <leader>k :call GetLoveDocs()<CR>
 endfunction
 
+function! SetLua()
+	syn keyword luaBuiltIn or and
+	hi link luaSymbolOperator GruvboxOrange
+	hi link luaParens GruvboxOrange
+	hi link luaFuncParens GruvboxOrange
+endfunction
+
+function! SetLua2p()
+	setfiletype lua
+	set syntax=lua
+	set commentstring=--\ %s
+	call SetLua()
+
+	syn match luaComment "!"
+	syn match luaComment "@"
+endfunction
+
 function! SetC()
 	if filereadable("Makefile")
 		nnoremap <leader>l :make<CR>
@@ -254,10 +272,8 @@ autocmd BufNewFile,BufRead *.hpp call SetCPP()
 autocmd BufNewFile,BufRead *.py call SetPython()
 autocmd BufNewFile,BufRead *.go call SetGo()
 autocmd BufNewFile,BufRead *.java call SetJava()
-autocmd BufRead,BufNewFile *.lua2p setfiletype lua
-" autocmd BufNewFile,BufRead *.lua2p call SetLove()
-autocmd BufNewFile,BufRead *.lua2p set syntax=lua
-autocmd BufNewFile,BufRead *.lua2p set commentstring=--\ %s
+autocmd BufNewFile,BufRead *.lua2p call SetLua2p()
+autocmd BufNewFile,BufRead *.lua call SetLua()
 autocmd BufNewFile,BufRead *.log :AnsiEsc
 autocmd BufNewFile,BufRead *.ASM set syntax=asm
 autocmd BufNewFile,BufRead *.png :!feh % &
