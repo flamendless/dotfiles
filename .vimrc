@@ -129,7 +129,7 @@ map <C-a> <esc>ggVG<CR>
 nnoremap <leader>o <C-w>o
 nnoremap <leader>b :bprevious<CR>
 nnoremap <leader>n :bnext<CR>
-nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<bar>ccl<CR>
 nnoremap <space>v :vsplit<CR>
 nnoremap <space>h :split<CR>
 cmap w!! w !sudo tee % >/dev/null
@@ -139,6 +139,8 @@ nnoremap <leader>s :Rg <C-r><C-w><CR>
 nnoremap <leader>t :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>. :cn<CR>
+nnoremap <leader>, :cp<CR>
 
 " GO TO VIM ULITMATE LEARNING EXPERIENCE!
 " noremap  <Up> ""
@@ -156,7 +158,7 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build|node_modules|new_assets',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|output|libs|build|node_modules|new_assets|migrations|tests',
   \ 'file': '\v\.(exe|dll)$',
   \ }
 
@@ -215,6 +217,7 @@ function! SetLua()
 	hi link luaSymbolOperator GruvboxOrange
 	hi link luaParens GruvboxOrange
 	hi link luaFuncParens GruvboxOrange
+	hi link luaBrackets GruvboxOrange
 	syn match luaBuiltIn ":"
 	syn match luaBuiltIn "\."
 endfunction

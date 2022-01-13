@@ -8,14 +8,17 @@ alias clip.exe="$win_path"/clip.exe
 
 function activate()
 {
-	echo "activating..."
+	echo "activating venv..."
 	source saleor-venv/bin/activate
+	echo "activated venv"
 }
 
 function migrate()
 {
 	echo "migrating..."
+	python3.8 manage.py makemigrations
 	python3.8 manage.py migrate -v 3
+	echo "migrated"
 }
 
 function serve()
@@ -55,16 +58,51 @@ function open_playground()
 	cmd.exe /c "start chrome $1/graphql/"
 }
 
+# usage ./wsl_run.sh gen_token <EMAIL> <PW>
+# or ./wsl_run.sh gen_token <EMAIL> <PW> https://develop.smop.asia
+function gen_token()
+{
+	if [ "$#" -lt 2 ]; then
+		echo "usage: ./wsl_run.sh gen_token <EMAIL> <PW>"
+		echo "example: ./wsl_run.sh gen_token <EMAIL> <PW> https://develop.smop.asia"
+		exit
+	fi
+
+	local email="$2"
+	local pw="$3"
+	local url="${4:-http://$(get_addr)}/graphql/"
+	local origin="origin: $4"
+	local sec_fetch_site="sec-fetch-site: same-origin"
+	local sec_fetch_mode="sec-fetch-mode: cors"
+	local sec_fetch_dest="sec-fetch-dest: empty"
+	local ref="referer: $url"
+
+	local query=$(jq -Rs . <<< "mutation {tokenCreate(email: \"$email\", password: \"$pw\"){token}}")
+	local data=$(curl -H "Content-Type: application/json" \
+		-H "accept: */*" \
+		-H "$origin" \
+		-H "$sec_fetch_site" \
+		-H "$sec_fetch_mode" \
+		-H "$sec_fetch_dest" \
+		-H  "$ref" \
+		"$url" -d "{\"query\": ${query}}" | jq .data.tokenCreate.token)
+	data=$(echo "$data" | tr -d '"')
+	echo "{\"Authorization\":\"JWT $data\"}" | clip.exe
+	echo $data
+}
+
 if [ "$#" -eq 0 ]; then
 	echo "First use: chmod +x run.sh"
 	echo "Usage: ./run.sh"
 	echo "\tIt will run the API server and open graphql playground in Windows' chrome browser"
-	echo "Possible commands: activate, get_addr, copy_to_clipboard, open_playground, serve"
+	echo "Possible commands: activate, get_addr, copy_to_clipboard, open_playground, serve, gen_token"
+	cd ~/smopbackend
 	activate
 	addr=$(get_addr)
 	copy_to_clipboard "$addr"
 	open_playground "$addr"
 	serve
-elif [ "$#" -eq 1 ]; then
-	"$1"
+else
+	cd ~/smopbackend
+	"$1" "$@"
 fi
