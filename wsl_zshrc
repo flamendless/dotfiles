@@ -10,19 +10,21 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+source ~/smopbackend/.profile
+
 export PATH=~/.local/bin:$PATH
 export EDITOR=vim
 export KEYTIMEOUT=1
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
-export DATABASE_URL=postgres://saleor:saleor@localhost:5432/smopbe
-export ALLOWED_HOSTS="localhost, develop.smop.asia, *"
+# export DATABASE_URL=postgres://saleor:saleor@localhost:5432/smopbe
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*" --glob "!migrations" --glob "!tests"'
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # For WSL setup
 alias cdwin="cd /mnt/c/Users/user/Desktop"
 alias clip.exe="/mnt/c/Windows/System32/clip.exe"
+alias smop_wsl="sh ~/wsl_run.sh"
 
 alias mv="mv -iv"
 alias cp="cp -iv"
