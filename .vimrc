@@ -76,7 +76,7 @@ Plug 'davisdude/vim-love-docs', { 'branch': 'build' }
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c++', 'cpp']}
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/AnsiEsc.vim'
-Plug 'liuchengxu/eleline.vim'
+Plug 'ourigen/skyline.vim'
 Plug 'ap/vim-buftabline'
 Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'

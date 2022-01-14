@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 # script for WSL2 -> Windows workflow
 # - Brandon Blanker Lim-it
 
@@ -58,8 +58,6 @@ function open_playground()
 	cmd.exe /c "start chrome $1/graphql/"
 }
 
-# usage ./wsl_run.sh gen_token <EMAIL> <PW>
-# or ./wsl_run.sh gen_token <EMAIL> <PW> https://develop.smop.asia
 function gen_token()
 {
 	if [ "$#" -lt 2 ]; then
@@ -76,19 +74,45 @@ function gen_token()
 	local sec_fetch_mode="sec-fetch-mode: cors"
 	local sec_fetch_dest="sec-fetch-dest: empty"
 	local ref="referer: $url"
+	local filename=/tmp/smop_token.json
 
-	local query=$(jq -Rs . <<< "mutation {tokenCreate(email: \"$email\", password: \"$pw\"){token}}")
-	local data=$(curl -H "Content-Type: application/json" \
-		-H "accept: */*" \
-		-H "$origin" \
-		-H "$sec_fetch_site" \
-		-H "$sec_fetch_mode" \
-		-H "$sec_fetch_dest" \
-		-H  "$ref" \
-		"$url" -d "{\"query\": ${query}}" | jq .data.tokenCreate.token)
-	data=$(echo "$data" | tr -d '"')
-	echo "{\"Authorization\":\"JWT $data\"}" | clip.exe
-	echo $data
+	while :; do
+		local query=$(jq -Rs . <<< "mutation {tokenCreate(email: \"$email\", password: \"$pw\"){token}}")
+		curl \
+			-H "Content-Type: application/json" \
+			-H "accept: */*" \
+			-H "$origin" \
+			-H "$sec_fetch_site" \
+			-H "$sec_fetch_mode" \
+			-H "$sec_fetch_dest" \
+			-H "$ref" \
+			-o "$filename" \
+			"$url" -d "{\"query\": ${query}}"
+		local res=$?
+
+		if [ $res -eq 0  ]; then
+			local data=$(jq .data.tokenCreate.token < "$filename")
+			data=$(echo "$data" | tr -d '"')
+			echo $data
+			echo "{\"Authorization\":\"JWT $data\"}" | clip.exe
+			rm "$filename"
+			break
+		else
+			echo "the url might be incorrect or the server is down."
+			echo "retrying after 3 seconds..."
+			sleep 3
+		fi
+	done
+}
+
+function run()
+{
+	echo "running..."
+	activate
+	addr=$(get_addr)
+	copy_to_clipboard "$addr"
+	open_playground "$addr"
+	serve
 }
 
 if [ "$#" -eq 0 ]; then
@@ -97,11 +121,6 @@ if [ "$#" -eq 0 ]; then
 	echo "\tIt will run the API server and open graphql playground in Windows' chrome browser"
 	echo "Possible commands: activate, get_addr, copy_to_clipboard, open_playground, serve, gen_token"
 	cd ~/smopbackend
-	activate
-	addr=$(get_addr)
-	copy_to_clipboard "$addr"
-	open_playground "$addr"
-	serve
 else
 	cd ~/smopbackend
 	"$1" "$@"
