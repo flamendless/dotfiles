@@ -126,7 +126,6 @@ sunmap e
 map <S-k> <Nop>
 " imap <leader>f <C-x><C-f>
 map <C-a> <esc>ggVG<CR>
-nnoremap <leader>o <C-w>o
 nnoremap <leader>b :bprevious<CR>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<bar>ccl<CR>
@@ -138,7 +137,8 @@ nnoremap <leader>s :Rg <C-r><C-w><CR>
 " inoremap <expr> <leader>f fzf#vim#complete#path('rg --files')
 nnoremap <leader>t :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
-nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>o :MaximizerToggle!<CR>
+" nnoremap <leader>o <C-w>o
 nnoremap <leader>. :cn<CR>
 nnoremap <leader>, :cp<CR>
 
@@ -213,7 +213,7 @@ function! SetLove()
 endfunction
 
 function! SetLua()
-	syn keyword luaBuiltIn or and
+	syn keyword luaBuiltIn or and not
 	hi link luaSymbolOperator GruvboxOrange
 	hi link luaParens GruvboxOrange
 	hi link luaFuncParens GruvboxOrange
