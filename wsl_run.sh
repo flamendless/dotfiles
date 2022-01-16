@@ -227,7 +227,7 @@ function gen_token_customer()
 		local fname=$(get_input "Enter first name: ")
 		local lname=$(get_input "Enter last name: ")
 		local gender=$(get_input "Enter gender: [MALE, FEMALE, NON_BINARY, PREFER_NOT_TO_SAY] ")
-		local year=$(get_input "Enter year: (ex: 2021) ")
+		local year=$(get_input "Enter year: (ex: 1997) ")
 		local month=$(get_input "Enter month: (ex: 11) ")
 		local day=$(get_input "Enter day: (ex: 02) ")
 		local email=$(get_input "Enter email: ")
@@ -245,8 +245,8 @@ function gen_token_customer()
 						contactNo: \"$mobile_number\"
 					})
 				{
-					user {id status}
-					accountErrors {field message}
+					user {id, status}
+					accountErrors {field, message}
 				}
 			}")
 		local status_creation=$(curl_req "$url" "$query_customer_create" ".data.smopCustomerCreate.user.status")
@@ -262,7 +262,7 @@ function gen_token_customer()
 			smopCustomerLogin(contactNo: \"$mobile_number\", mobileOtp: \"$id\")
 			{
 				token
-				accountErrors {field message}
+				accountErrors {field, message}
 			}
 		}")
 	local token=$(curl_req "$url" "$query_customer_login" ".data.smopCustomerLogin.token" true)

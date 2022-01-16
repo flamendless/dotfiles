@@ -32,7 +32,6 @@ $response = Invoke-WebRequest -UseBasicParsing -Uri "$url/graphql/" `
 	-Headers @{
 		"accept"="*/*"
 		"Origin"="$url"
-		"Referer"="$url/graphql/"
 	} `
 	-ContentType "application/json" `
 	-Body "{`"query`":`"mutation {tokenCreate(email: \`"$email\`", password: \`"$pw\`") {token}}`"}"
