@@ -82,7 +82,6 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot'
-Plug 'szw/vim-maximizer'
 
 Plug 'gruvbox-community/gruvbox'
 call plug#end()
@@ -137,8 +136,7 @@ nnoremap <leader>s :Rg <C-r><C-w><CR>
 " inoremap <expr> <leader>f fzf#vim#complete#path('rg --files')
 nnoremap <leader>t :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
-nnoremap <leader>o :MaximizerToggle!<CR>
-" nnoremap <leader>o <C-w>o
+nnoremap <leader>o <C-w>o
 nnoremap <leader>. :cn<CR>
 nnoremap <leader>, :cp<CR>
 
