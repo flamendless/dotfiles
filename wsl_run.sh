@@ -16,9 +16,18 @@ function activate()
 function migrate()
 {
 	echo "migrating..."
-	python3.8 manage.py makemigrations
-	python3.8 manage.py migrate -v 3
-	echo "migrated"
+	git clean -d -n
+
+	local should_proceed=$(get_input "Proceed in cleaning files? [y/n]: ")
+	if [[ "$should_proceed" == "y" ]]; then
+		echo "cleaning..."
+		git clean -d -f
+		python3.8 manage.py makemigrations
+		python3.8 manage.py migrate -v 3
+		echo "migrated"
+		exit
+	fi
+	echo "not migrating due to excess migration files?"
 }
 
 function serve()
@@ -55,7 +64,7 @@ function open_playground()
 		return
 	fi
 
-	cmd.exe /c "start chrome $1/graphql/"
+	cmd.exe /c "start vivaldi $1/graphql/"
 }
 
 function check_for_deps()
@@ -222,6 +231,9 @@ function gen_token_customer()
 	local status_ver=$(curl_req "$url" "$query_otp_verify" ".data.mobileOtpVerify.mobileOtp.status")
 	echo "verification status: $status_ver"
 
+	local url_local="http://$(get_addr)/graphql/"
+	echo "logging in localhost: $url_local"
+
 	local should_create_customer=$(get_input "Do you want to create smop customer? [y/n] (no input defaults to no): " false true)
 	if [[ "$should_create_customer" == "y" ]]; then
 		local fname=$(get_input "Enter first name: ")
@@ -249,7 +261,7 @@ function gen_token_customer()
 					accountErrors {field, message}
 				}
 			}")
-		local status_creation=$(curl_req "$url" "$query_customer_create" ".data.smopCustomerCreate.user.status")
+		local status_creation=$(curl_req "$url_local" "$query_customer_create" ".data.smopCustomerCreate.user.status")
 		echo "creation status: $status_creation"
 	elif [[ -z "$should_create_customer" ]] || [[ "$should_create_customer" == "n" ]]; then
 		echo "skipping smop customer creation..."
@@ -265,7 +277,7 @@ function gen_token_customer()
 				accountErrors {field, message}
 			}
 		}")
-	local token=$(curl_req "$url" "$query_customer_login" ".data.smopCustomerLogin.token" true)
+	local token=$(curl_req "$url_local" "$query_customer_login" ".data.smopCustomerLogin.token" true)
 	echo "token: $token"
 }
 
