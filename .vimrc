@@ -221,13 +221,18 @@ function! SetLua()
 endfunction
 
 function! SetLua2p()
-	setfiletype lua
 	set syntax=lua
 	set commentstring=--\ %s
-	call SetLua()
-
+	syn keyword luaBuiltIn or and not
+	hi link luaSymbolOperator GruvboxOrange
+	hi link luaParens GruvboxOrange
+	hi link luaFuncParens GruvboxOrange
+	hi link luaBrackets GruvboxOrange
+	syn match luaBuiltIn ":"
+	syn match luaBuiltIn "\."
 	syn match luaComment "!"
 	syn match luaComment "@"
+	call SetLove()
 endfunction
 
 function! SetC()
