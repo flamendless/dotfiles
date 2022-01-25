@@ -22,10 +22,13 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # For WSL setup
-alias cdwin="cd /mnt/c/Users/user/Desktop"
+alias cdwin="cd /mnt/c/Users/user"
 alias clip.exe="/mnt/c/Windows/System32/clip.exe"
 alias smop_wsl="sh ~/wsl_run.sh"
-alias ssh_agent="eval $(ssh-agent)"
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
 
 alias mv="mv -iv"
 alias cp="cp -iv"
