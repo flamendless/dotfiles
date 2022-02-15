@@ -24,7 +24,9 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # For WSL setup
 alias cdwin="cd /mnt/c/Users/user"
 alias clip.exe="/mnt/c/Windows/System32/clip.exe"
-alias smop_wsl="sh ~/wsl_run.sh"
+alias smopbe_run="sh ~/wsl_run.sh run"
+alias smopbe_gen="sh ~/wsl_run.sh gen_token"
+
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval `ssh-agent -s`
   ssh-add
@@ -45,3 +47,4 @@ alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 alias gC="git commit"
 alias gS="git status"
 alias gP="git push"
+alias gb="git brunch"

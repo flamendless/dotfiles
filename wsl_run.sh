@@ -139,14 +139,21 @@ function curl_req()
 			local data=$(parse_token $filename $props)
 			echo $data
 			if [ $is_token ]; then
-				echo "{\"Authorization\":\"JWT $data\"}" | clip.exe
+				# browser
+				# echo "{\"Authorization\":\"JWT $data\"}" | clip.exe
+
+				# altair env
+				# echo "{\"token\":\"$data\"}" | clip.exe
+
+				# insomnia env + global headers plugin
+				echo "{\"GLOBAL_HEADERS\": {\"Authorization\": \"JWT $data\"}}" | clip.exe
 			fi
 			rm "$filename"
 			break
 		else
 			echo "the url might be incorrect or the server is down."
-			echo "retrying after 3 seconds..."
-			sleep 2
+			echo "retrying after 1 seconds..."
+			sleep 1
 		fi
 	done
 }
