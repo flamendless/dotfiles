@@ -82,7 +82,8 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot'
-
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
 Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
