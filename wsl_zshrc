@@ -24,22 +24,29 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # For WSL setup
 alias cdwin="cd /mnt/c/Users/user"
 alias clip.exe="/mnt/c/Windows/System32/clip.exe"
-alias smopbe_run="sh ~/wsl_run.sh run"
-alias smopbe_gen="sh ~/wsl_run.sh gen_token"
+alias win32yank.exe="/mnt/c/Users/user/Documents/win32yank/win32yank.exe"
+alias smopbe_run="sh ~/maintenance_scripts/wsl_run.sh run"
+alias smopbe_gen="sh ~/maintenance_scripts/wsl_run.sh gen_token"
+alias pq="pgcli -U saleor smopbe"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval `ssh-agent -s`
   ssh-add
+	ssh-add ~/smop_poc.pem
 fi
 
+. /usr/share/LS_COLORS/dircolors.sh #lscolors-git
+
+alias vim="nvim"
 alias mv="mv -iv"
 alias cp="cp -iv"
 alias rm="rm -iv"
 alias cls="clear"
-alias ls="exa -l"
-alias la="exa -la"
+alias ls="exa -l --icons"
+alias la="exa -la --icons"
 alias zshrc="vim /home/flamendless/.zshrc"
 alias vimrc="vim /home/flamendless/.vimrc"
+alias nvimrc="vim /home/flamendless/.config/nvim/lua/user/settings.lua"
 alias reload="source ~/.zshrc"
 alias cat="bat"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
