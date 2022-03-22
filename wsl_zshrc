@@ -27,6 +27,7 @@ alias clip.exe="/mnt/c/Windows/System32/clip.exe"
 alias win32yank.exe="/mnt/c/Users/user/Documents/win32yank/win32yank.exe"
 alias smopbe_run="sh ~/maintenance_scripts/wsl_run.sh run"
 alias smopbe_gen="sh ~/maintenance_scripts/wsl_run.sh gen_token"
+alias smopbe_gen_c="sh ~/maintenance_scripts/wsl_run.sh gen_token_customer"
 alias pq="pgcli -U saleor smopbe"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
