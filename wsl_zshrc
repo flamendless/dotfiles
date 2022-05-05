@@ -28,13 +28,14 @@ alias win32yank.exe="/mnt/c/Users/user/Documents/win32yank/win32yank.exe"
 alias smopbe_run="sh ~/maintenance_scripts/wsl_run.sh run"
 alias smopbe_gen="sh ~/maintenance_scripts/wsl_run.sh gen_token"
 alias smopbe_gen_c="sh ~/maintenance_scripts/wsl_run.sh gen_token_customer"
+alias pyshell="python3.8 manage.py shell"
 alias pq="pgcli -U saleor smopbe"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
 	ssh-add
-	ssh-add ~/smop_poc.pem
-	ssh-add ~/.ssh/smop_uat.pub
+	ssh-add ~/.ssh/smop_poc.pem
+	ssh-add ~/.ssh/smop_uat
 fi
 
 . /usr/share/LS_COLORS/dircolors.sh #lscolors-git
