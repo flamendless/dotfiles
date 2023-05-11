@@ -12,11 +12,13 @@ fi
 
 source ~/smopbackend/.profile
 source ~/smopfrontend/.profile
+source ~/smop_put/.profile
 
 export PATH=~/.local/bin:$PATH
 export EDITOR=vim
 export KEYTIMEOUT=1
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export ANDROID_HOME=/opt/android-sdk/
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*" --glob "!migrations" --glob "!tests"'
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
@@ -25,10 +27,6 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 alias cdwin="cd /mnt/c/Users/user"
 alias clip.exe="/mnt/c/Windows/System32/clip.exe"
 alias win32yank.exe="/mnt/c/Users/user/Documents/win32yank/win32yank.exe"
-alias smopbe_run="sh ~/maintenance_scripts/wsl_run.sh run"
-alias smopbe_gen="sh ~/maintenance_scripts/wsl_run.sh gen_token"
-alias smopbe_gen_c="sh ~/maintenance_scripts/wsl_run.sh gen_token_customer"
-alias pyshell="python3.8 manage.py shell"
 alias pq="pgcli -U saleor smopbe"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
@@ -58,3 +56,10 @@ alias gC="git commit"
 alias gS="git status"
 alias gP="git push"
 alias gb="git brunch"
+alias gg="git gui"
+alias gu="gitui"
+alias gL="git log"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
