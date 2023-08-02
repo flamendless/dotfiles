@@ -52,6 +52,10 @@ alias reload="source ~/.zshrc"
 alias cat="bat"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 
+function pact() {
+	source "$(poetry env info --path)/bin/activate"
+}
+
 alias gC="git commit"
 alias gS="git status"
 alias gP="git push"
