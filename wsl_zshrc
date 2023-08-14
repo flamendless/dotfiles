@@ -49,11 +49,11 @@ alias zshrc="vim /home/flamendless/.zshrc"
 alias vimrc="vim /home/flamendless/.vimrc"
 alias nvimrc="vim /home/flamendless/.config/nvim/lua/user/settings.lua"
 alias reload="source ~/.zshrc"
-alias cat="bat"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 
 function pact() {
 	source "$(poetry env info --path)/bin/activate"
+	export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 }
 
 alias gC="git commit"
