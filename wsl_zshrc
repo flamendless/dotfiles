@@ -13,6 +13,7 @@ fi
 source ~/smopbackend/.profile
 source ~/smopfrontend/.profile
 source ~/smop_put/.profile
+source ~/parkmate/.profile
 
 export PATH=~/.local/bin:$PATH
 export EDITOR=vim
@@ -34,6 +35,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	ssh-add
 	ssh-add ~/.ssh/smop_poc.pem
 	ssh-add ~/.ssh/smop_uat
+	ssh-add ~/parkmate/db-bastion-host-key-pair.pem
 fi
 
 . /usr/share/LS_COLORS/dircolors.sh #lscolors-git
