@@ -63,7 +63,7 @@ alias gc="git checkout"
 alias gS="git status"
 alias gp="git pull"
 alias gP="git push"
-alias gL="git log"
+alias gL="git log --pretty=oneline"
 
 alias dsm="git standup"
 alias gu="gitui"
