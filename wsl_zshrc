@@ -53,6 +53,7 @@ alias vimrc="vim /home/flamendless/.vimrc"
 alias nvimrc="vim /home/flamendless/.config/nvim/lua/user/settings.lua"
 alias reload="source ~/.zshrc"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
+alias memcheck="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
 
 function pact() {
 	source "$(poetry env info --path)/bin/activate"
