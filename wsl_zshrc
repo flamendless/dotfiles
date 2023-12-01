@@ -36,11 +36,12 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	ssh-add
 	ssh-add ~/.ssh/smop_poc.pem
 	ssh-add ~/.ssh/smop_uat
-	ssh-add ~/parkmate/db-bastion-host-key-pair.pem
+	ssh-add ~/pem/parkmate.db-bastion-host-key-pair.pem
 fi
 
 . /usr/share/LS_COLORS/dircolors.sh #lscolors-git
 
+alias v="nvim"
 alias vim="nvim"
 alias mv="mv -iv"
 alias cp="cp -iv"
@@ -50,7 +51,6 @@ alias ls="exa -l --icons"
 alias la="exa -la --icons"
 alias zshrc="vim /home/flamendless/.zshrc"
 alias vimrc="vim /home/flamendless/.vimrc"
-alias nvimrc="vim /home/flamendless/.config/nvim/lua/user/settings.lua"
 alias reload="source ~/.zshrc"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 alias memcheck="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
