@@ -70,6 +70,7 @@ alias dsm="git standup"
 alias gu="gitui"
 alias gg="git gui"
 alias gb="git brunch"
+alias gbs="~/dotfiles/better-git-branch.sh"
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
