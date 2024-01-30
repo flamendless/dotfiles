@@ -10,10 +10,19 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 	source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source ~/smopbackend/.profile
-source ~/smopfrontend/.profile
-source ~/smop_put/.profile
-source ~/parkmate/.profile
+if [ -f ~/smopbackend/.profile ]; then
+	source ~/smopbackend/.profile
+fi
+if [ -f ~/smopfrontend/.profile ]; then
+	source ~/smopfrontend/.profile
+fi
+if [ -f ~/smop_put/.profile ]; then
+	source ~/smop_put/.profile
+fi
+if [ -f ~/parkmate/.profile ]; then
+	source ~/parkmate/.profile
+fi
+
 
 export VISUAL=nvim
 export PATH=~/.local/bin:$PATH
@@ -34,12 +43,16 @@ alias pq="pgcli -U saleor smopbe"
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
 	ssh-add
-	ssh-add ~/.ssh/smop_poc.pem
-	ssh-add ~/.ssh/smop_uat
-	ssh-add ~/pem/parkmate.db-bastion-host-key-pair.pem
+	if [ -f ~/.ssh/smop_poc.pem ]; then
+		ssh-add ~/.ssh/smop_poc.pem
+	fi
+	if [ -f ~/.ssh/smop_uat ]; then
+		ssh-add ~/.ssh/smop_uat
+	fi
+	if [ -f ~/pem/parkmate.db-bastion-host-key-pair.pem ]; then
+		ssh-add ~/pem/parkmate.db-bastion-host-key-pair.pem
+	fi
 fi
-
-. /usr/share/LS_COLORS/dircolors.sh #lscolors-git
 
 alias v="nvim"
 alias vim="nvim"
