@@ -12,11 +12,20 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# https://github.com/zsh-users/zsh-history-substring-search
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# https://github.com/zsh-users/zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # https://github.com/sindresorhus/pure
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+# PERSONAL
 export VISUAL=nvim
 export PATH=~/.local/bin:$PATH
 export EDITOR=nvim
