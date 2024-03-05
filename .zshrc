@@ -12,8 +12,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# https://github.com/agnoster/agnoster-zsh-theme
-source ~/agnoster-zsh-theme/agnoster.zsh-theme
+# https://github.com/sindresorhus/pure
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
 
 export VISUAL=nvim
 export PATH=~/.local/bin:$PATH
