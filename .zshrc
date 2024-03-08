@@ -21,6 +21,7 @@ bindkey '^[[B' history-substring-search-down
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/sindresorhus/pure
+PURE_PROMPT_SYMBOL=::
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
@@ -66,6 +67,7 @@ alias gp="git pull"
 alias gP="git push"
 alias gL="git log --pretty=oneline"
 
+alias dsm="git standup"
 alias gu="gitui"
 alias gbs="~/dotfiles/better-git-branch.sh"
 
