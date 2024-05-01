@@ -45,7 +45,7 @@ export VISUAL=nvim
 export PATH=~/.local/bin:$PATH
 export EDITOR=nvim
 export KEYTIMEOUT=1
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
 export ANDROID_HOME=/opt/android-sdk
 export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
 export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -104,3 +104,19 @@ fi
 
 export GEM_HOME="$(gem env user_gemhome)"
 export PATH="$PATH:$GEM_HOME/bin"
+
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+	source /usr/share/nvm/init-nvm.sh
+fi
+
+# WSL
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+	export GOOS=windows
+
+	# Windows 10 WSL
+	export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
+	# Windows 11 WSL + WSLG
+	# export DISPLAY=:0
+	# export LC_ALL=C
+fi
