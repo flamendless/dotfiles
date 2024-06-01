@@ -111,8 +111,6 @@ fi
 
 # WSL
 if [[ $(grep -i Microsoft /proc/version) ]]; then
-	export GOOS=windows
-
 	# Windows 10 WSL
 	export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 	export WEBKIT_DISABLE_COMPOSITING_MODE=1
