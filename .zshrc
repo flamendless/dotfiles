@@ -121,3 +121,6 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then
 	# export DISPLAY=:0
 	# export LC_ALL=C
 fi
+
+source "$HOME/.cargo/env"
+source $HOME/.cargo/bin
