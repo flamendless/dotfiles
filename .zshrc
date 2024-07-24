@@ -115,7 +115,7 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then
 	# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
 	export DISPLAY=$(ip route list default | awk '{print $3}'):0
 	export WEBKIT_DISABLE_COMPOSITING_MODE=1
-	export LIBGL_ALWAYS_INDIRECT=1
+	# export LIBGL_ALWAYS_INDIRECT=1
 
 	# Windows 11 WSL + WSLG
 	# export DISPLAY=:0
