@@ -2,3 +2,11 @@
 !migrations
 --glob
 !tests
+--glob
+!*_templ.go
+--glob
+!*_string.go
+--glob
+!*.pb.go
+--glob
+!*.sql.go
