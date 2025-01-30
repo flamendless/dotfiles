@@ -62,7 +62,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	fi
 fi
 
-alias v="nvim"
+alias v="nvim ."
 alias vim="nvim"
 alias mv="mv -iv"
 alias cp="cp -iv"
