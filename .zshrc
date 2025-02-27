@@ -98,10 +98,6 @@ export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-if [ -f ~/omi-parkmate-api/.profile ]; then
-	source ~/omi-parkmate-api/.profile
-fi
-
 export GEM_HOME="$(gem env user_gemhome)"
 export PATH="$PATH:$GEM_HOME/bin"
 
