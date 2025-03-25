@@ -130,3 +130,5 @@ esac
 # pnpm end
 
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+
+source <(fzf --zsh)
