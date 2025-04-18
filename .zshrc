@@ -118,8 +118,10 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then
 	# export LC_ALL=C
 fi
 
-source "$HOME/.cargo/env"
-source $HOME/.cargo/bin
+if [ -d "$HOME/.cargo/" ]; then
+	source "$HOME/.cargo/env"
+	source $HOME/.cargo/bin
+fi
 
 # pnpm
 export PNPM_HOME="/home/flamendless/.local/share/pnpm"
