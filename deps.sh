@@ -33,7 +33,8 @@ install_yay() {
 install_go() {
     yay -S \
         libvips \
-        go
+        go \
+        mkcert
 }
 
 install_all() {
