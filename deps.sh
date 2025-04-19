@@ -14,7 +14,8 @@ install_main() {
         ruby \
         jq \
         openssh \
-        pnpm
+        pnpm \
+        ripgrep
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
