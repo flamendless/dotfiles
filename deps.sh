@@ -9,7 +9,6 @@ install_main() {
         tmux \
         gitui \
         npm \
-        go \
         rust \
         ruby \
         jq \
@@ -31,9 +30,16 @@ install_yay() {
     makepkg -si
 }
 
+install_go() {
+    yay -S \
+        libvips \
+        go
+}
+
 install_all() {
     install_main
     install_yay
+    install_go
 }
 
 if [ "$#" -eq 0 ]; then
