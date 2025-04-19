@@ -34,7 +34,8 @@ install_go() {
     yay -S \
         libvips \
         go \
-        mkcert
+        mkcert \
+        nginx
 }
 
 install_all() {
