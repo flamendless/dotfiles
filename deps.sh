@@ -38,10 +38,17 @@ install_go() {
         nginx
 }
 
+install_py() {
+    yay -S \
+        poetry \
+        ruff
+}
+
 install_all() {
     install_main
     install_yay
     install_go
+    install_py
 }
 
 if [ "$#" -eq 0 ]; then
