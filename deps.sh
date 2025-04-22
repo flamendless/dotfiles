@@ -41,6 +41,7 @@ install_go() {
 install_py() {
     yay -S \
         poetry \
+        python-poetry-plugin-shell \
         ruff
 }
 
