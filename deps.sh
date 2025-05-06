@@ -7,7 +7,6 @@ install_main() {
         neovim \
         exa \
         tmux \
-        gitui \
         npm \
         rust \
         ruby \
@@ -18,6 +17,11 @@ install_main() {
         less
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
+}
+
+install_git() {
+    yay -S gitui \
+        git-standup
 }
 
 install_yay() {
@@ -50,6 +54,7 @@ install_all() {
     install_main
     install_yay
     install_go
+    install_git
     install_py
 }
 
