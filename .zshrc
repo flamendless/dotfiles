@@ -54,6 +54,9 @@ export PATH=$PATH:/opt/android-sdk/build-tools/33.0.1/
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*" --glob "!migrations" --glob "!tests"'
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
+export LC_CTYPE=C.UTF-8
+export LC_ALL=C.UTF-8
+
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
 	ssh-add
