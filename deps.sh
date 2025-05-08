@@ -14,7 +14,8 @@ install_main() {
         openssh \
         pnpm \
         ripgrep \
-        less
+        less \
+        jq
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
