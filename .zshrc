@@ -127,7 +127,7 @@ if [ -d "$HOME/.cargo/" ]; then
 fi
 
 if [ -d "$HOME/sqlcheck/sqlcheck-x86_64/bin/" ]; then
-	alias sqlcheck="$HOME/sqlcheck/sqlcheck-x86_64/bin/sqlcheck"
+	export PATH=$HOME/sqlcheck/sqlcheck-x86_64/bin/sqlcheck:$PATH
 fi
 
 # pnpm
