@@ -126,6 +126,10 @@ if [ -d "$HOME/.cargo/" ]; then
 	source $HOME/.cargo/bin
 fi
 
+if [ -d "$HOME/sqlcheck/sqlcheck-x86_64/bin/" ]; then
+	alias sqlcheck="$HOME/sqlcheck/sqlcheck-x86_64/bin/sqlcheck"
+fi
+
 # pnpm
 export PNPM_HOME="/home/flamendless/.local/share/pnpm"
 case ":$PATH:" in

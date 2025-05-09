@@ -20,11 +20,6 @@ install_main() {
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
 
-install_git() {
-    yay -S gitui \
-        git-standup
-}
-
 install_yay() {
     if [ -d "$HOME/yay/" ]; then
         echo "yay already cloned. Skipping..."
@@ -36,8 +31,13 @@ install_yay() {
     makepkg -si
 }
 
+install_git() {
+    yay -Sy gitui \
+        git-standup
+}
+
 install_go() {
-    yay -S \
+    yay -Sy \
         libvips \
         go \
         mkcert \
@@ -45,18 +45,30 @@ install_go() {
 }
 
 install_py() {
-    yay -S \
+    yay -Sy \
         poetry \
         python-poetry-plugin-shell \
         ruff
 }
 
+install_sql() {
+    yay -Sy \
+        wget \
+        unzip
+
+    mkdir -p "$HOME/sqlcheck"
+    cd "$HOME/sqlcheck"
+    wget https://github.com/jarulraj/sqlcheck/releases/download/v1.3/sqlcheck-x86_64.zip
+    unzip sqlcheck-x86_64.zip
+}
+
 install_all() {
     install_main
     install_yay
-    install_go
     install_git
+    install_go
     install_py
+    install_sql
 }
 
 if [ "$#" -eq 0 ]; then
