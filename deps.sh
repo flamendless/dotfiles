@@ -15,7 +15,8 @@ install_main() {
         pnpm \
         ripgrep \
         less \
-        jq
+        jq \
+        lsof
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
