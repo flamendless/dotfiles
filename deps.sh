@@ -55,12 +55,16 @@ install_py() {
 install_sql() {
     yay -Sy \
         wget \
-        unzip
+        unzip \
+        libarchive \
+        postgresql
 
-    mkdir -p "$HOME/sqlcheck"
-    cd "$HOME/sqlcheck"
-    wget https://github.com/jarulraj/sqlcheck/releases/download/v1.3/sqlcheck-x86_64.zip
-    unzip sqlcheck-x86_64.zip
+    if [ ! -d "$HOME/sqlcheck/" ]; then
+        mkdir -p "$HOME/sqlcheck"
+        cd "$HOME/sqlcheck"
+        wget https://github.com/jarulraj/sqlcheck/releases/download/v1.3/sqlcheck-x86_64.zip
+        unzip sqlcheck-x86_64.zip
+    fi
 }
 
 install_all() {
