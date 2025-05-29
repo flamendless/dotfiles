@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 install_main() {
     sudo pacman -S --needed \
         git \

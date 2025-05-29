@@ -126,6 +126,10 @@ if [ -d "$HOME/.cargo/" ]; then
 	source $HOME/.cargo/bin
 fi
 
+if [ -f "$HOME/dotfiles/funcs.sh" ]; then
+	alias rgq="sh $HOME/dotfiles/funcs.sh rgq"
+fi
+
 if [ -d "$HOME/sqlcheck/sqlcheck-x86_64/bin/" ]; then
 	export PATH=$HOME/sqlcheck/sqlcheck-x86_64/bin/:$PATH
 fi
