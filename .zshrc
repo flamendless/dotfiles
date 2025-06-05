@@ -18,6 +18,8 @@ setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line 
 
 setopt extendedglob
 bindkey -v
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/flamendless/.zshrc'
