@@ -44,7 +44,8 @@ install_go() {
         libvips \
         go \
         mkcert \
-        nginx
+        nginx \
+        librsvg
 }
 
 install_py() {
