@@ -45,7 +45,8 @@ install_go() {
         go \
         mkcert \
         nginx \
-        librsvg
+        librsvg \
+        graphviz
 }
 
 install_py() {
