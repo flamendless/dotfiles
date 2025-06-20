@@ -47,6 +47,8 @@ install_go() {
         nginx \
         librsvg \
         graphviz
+
+    go install github.com/go-delve/delve/cmd/dlv@latest
 }
 
 install_py() {
@@ -93,9 +95,9 @@ install_all() {
 }
 
 if [ "$#" -eq 0 ]; then
-	echo "First use: chmod +x ${0}"
-	echo "Usage: ./deps.sh <install_what>"
+    echo "First use: chmod +x ${0}"
+    echo "Usage: ./deps.sh <install_what>"
 else
-	echo "Running ${1}"
-	time "$1" "$@"
+    echo "Running ${1}"
+    time "$1" "$@"
 fi
