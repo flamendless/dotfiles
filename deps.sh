@@ -71,6 +71,17 @@ install_sql() {
     fi
 }
 
+install_gamedev() {
+    echo "For ebitengine..."
+    yay -Sy \
+        alsa-lib \
+        libx11 \
+        xorg-xrandr \
+        xorg-xinput \
+        libxcursor \
+        libxinerama
+}
+
 install_all() {
     install_main
     install_yay
