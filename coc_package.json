@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "coc-json": ">=1.4.0",
-    "coc-pyright": ">=1.1.194",
-    "coc-sh": ">=0.6.1",
-    "coc-sumneko-lua": ">=0.0.13"
-  }
-}
