@@ -89,6 +89,7 @@ install_all() {
     install_go
     install_py
     install_sql
+    install_gamedev
 }
 
 if [ "$#" -eq 0 ]; then
