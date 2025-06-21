@@ -41,7 +41,6 @@ install_git() {
 
 install_go() {
     yay -Sy \
-        libvips \
         go \
         mkcert \
         nginx \
