@@ -39,6 +39,10 @@ install_git() {
         git-standup
 }
 
+install_dev() {
+    yay -Sy zoxide
+}
+
 install_go() {
     yay -Sy \
         go \
@@ -91,6 +95,7 @@ install_all() {
     install_py
     install_sql
     install_gamedev
+    install_dev
 }
 
 if [ "$#" -eq 0 ]; then
