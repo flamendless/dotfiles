@@ -79,6 +79,7 @@ alias zshrc="vim /home/flamendless/.zshrc"
 alias reload="source ~/.zshrc"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 alias memcheck="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
+alias cd="z"
 
 alias gc="git checkout"
 alias gS="git status"
@@ -147,3 +148,4 @@ esac
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
 source <(fzf --zsh)
+eval "$(zoxide init zsh)"
