@@ -56,8 +56,8 @@ export PATH=$PATH:/opt/android-sdk/build-tools/33.0.1/
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*" --glob "!migrations" --glob "!tests"'
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
-export LC_CTYPE=C.UTF-8
-export LC_ALL=C.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
@@ -115,13 +115,15 @@ fi
 if [[ $(grep -i Microsoft /proc/version) ]]; then
 	# Windows 10 WSL
 	# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
-	export DISPLAY=$(ip route list default | awk '{print $3}'):0
-	export WEBKIT_DISABLE_COMPOSITING_MODE=1
+	# export DISPLAY=$(ip route list default | awk '{print $3}'):0
+	# export WEBKIT_DISABLE_COMPOSITING_MODE=1
 	# export LIBGL_ALWAYS_INDIRECT=1
 
 	# Windows 11 WSL + WSLG
-	# export DISPLAY=:0
+	export DISPLAY=:0
 	# export LC_ALL=C
+
+	export BROWSER="cmd.exe /c start vivaldi"
 fi
 
 if [ -d "$HOME/.cargo/" ]; then
