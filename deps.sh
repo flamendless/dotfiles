@@ -36,7 +36,7 @@ install_yay() {
 }
 
 install_git() {
-    yay -Sy gitui \
+    yay -Sy lazygit \
         git-standup
 }
 

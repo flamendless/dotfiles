@@ -88,7 +88,7 @@ alias gP="git push"
 alias gL="git log --pretty=oneline"
 
 alias dsm="git standup"
-alias gu="gitui"
+alias gu="lazygit"
 alias gbs="~/dotfiles/better-git-branch.sh"
 
 export PYENV_ROOT="$HOME/.pyenv"
