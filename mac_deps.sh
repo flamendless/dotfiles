@@ -18,7 +18,10 @@ install_main() {
         jq \
         lsof \
         chafa \
-	eza
+        eza \
+        bash
+
+    echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells;
 }
 
 install_zsh() {
