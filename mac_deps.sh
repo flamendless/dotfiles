@@ -24,9 +24,10 @@ install_main() {
 install_zsh() {
     brew install \
         zsh \
-	zsh-history-substring-search \
-	zsh-autosuggestions \
-	pure
+        zsh-history-substring-search \
+        zsh-autosuggestions \
+        pure \
+        tpm
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }

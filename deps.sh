@@ -22,11 +22,12 @@ install_main() {
 }
 
 install_zsh() {
-    sudo pacman -S \
+    yay -Sy \
         zsh \
-	zsh-history-substring-search \
-	zsh-autosuggestions \
-	zsh-pure-prompt
+        zsh-history-substring-search \
+        zsh-autosuggestions \
+        zsh-pure-prompt \
+        tmux-plugin-manager
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
