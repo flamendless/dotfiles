@@ -22,23 +22,25 @@ bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/flamendless/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# https://github.com/zsh-users/zsh-history-substring-search
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [[ $(uname) == "Darwin" ]]; then
+	source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+	source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+	fpath+=($(brew --prefix)/share/zsh/site-functions)
+else
+	source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+	fpath+=($HOME/.zsh/pure)
+fi
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# https://github.com/zsh-users/zsh-autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# https://github.com/sindresorhus/pure
 PURE_PROMPT_SYMBOL=::
-fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -73,9 +75,9 @@ alias mv="mv -iv"
 alias cp="cp -iv"
 alias rm="rm -iv"
 alias cls="clear"
-alias ls="exa -l --icons"
-alias la="exa -la --icons"
-alias zshrc="vim /home/flamendless/.zshrc"
+alias ls="eza -l --icons"
+alias la="eza -la --icons"
+alias zshrc="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
 alias memcheck="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
@@ -98,32 +100,36 @@ eval "$(pyenv init -)"
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 # bun completions
-[ -s "/home/flamendless/.bun/_bun" ] && source "/home/flamendless/.bun/_bun"
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export GEM_HOME="$(gem env user_gemhome)"
-export PATH="$PATH:$GEM_HOME/bin"
+if [[ ! $(uname) == "Darwin" ]]; then
+	export GEM_HOME="$(gem env user_gemhome)"
+	export PATH="$PATH:$GEM_HOME/bin"
+fi
 
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
 	source /usr/share/nvm/init-nvm.sh
 fi
 
 # WSL
-if [[ $(grep -i Microsoft /proc/version) ]]; then
-	# Windows 10 WSL
-	# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
-	# export DISPLAY=$(ip route list default | awk '{print $3}'):0
-	# export WEBKIT_DISABLE_COMPOSITING_MODE=1
-	# export LIBGL_ALWAYS_INDIRECT=1
+if [[ -f /proc/version ]]; then
+	if [[ $(grep -i Microsoft /proc/version) ]]; then
+		# Windows 10 WSL
+		# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+		# export DISPLAY=$(ip route list default | awk '{print $3}'):0
+		# export WEBKIT_DISABLE_COMPOSITING_MODE=1
+		# export LIBGL_ALWAYS_INDIRECT=1
 
-	# Windows 11 WSL + WSLG
-	export DISPLAY=:0
-	# export LC_ALL=C
+		# Windows 11 WSL + WSLG
+		export DISPLAY=:0
+		# export LC_ALL=C
 
-	export BROWSER="cmd.exe /c start vivaldi"
+		export BROWSER="cmd.exe /c start vivaldi"
+	fi
 fi
 
 if [ -d "$HOME/.cargo/" ]; then
@@ -140,7 +146,7 @@ if [ -d "$HOME/sqlcheck/sqlcheck-x86_64/bin/" ]; then
 fi
 
 # pnpm
-export PNPM_HOME="/home/flamendless/.local/share/pnpm"
+export PNPM_HOME="~/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
