@@ -109,8 +109,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if [[ ! $(uname) == "Darwin" ]]; then
 	export GEM_HOME="$(gem env user_gemhome)"
 	export PATH="$PATH:$GEM_HOME/bin"
+else
 	alias bash=/opt/homebrew/bin/bash
-
 fi
 
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
