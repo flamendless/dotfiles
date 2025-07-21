@@ -37,7 +37,8 @@ install_zsh() {
 
 install_git() {
     brew install lazygit \
-        git-standup
+        git-standup \
+        gh
 }
 
 install_dev() {
