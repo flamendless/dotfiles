@@ -64,9 +64,6 @@ export LC_ALL=en_US.UTF-8
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
 	ssh-add
-	if [ -f ~/pem/parkmate.db-bastion-host-key-pair.pem ]; then
-		ssh-add ~/pem/parkmate.db-bastion-host-key-pair.pem
-	fi
 fi
 
 alias v="nvim ."

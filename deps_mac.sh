@@ -43,6 +43,7 @@ install_git() {
 
 install_dev() {
     brew install zoxide
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 install_go() {

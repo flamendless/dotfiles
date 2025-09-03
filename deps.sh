@@ -50,6 +50,7 @@ install_git() {
 
 install_dev() {
     yay -Sy zoxide
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 install_go() {
