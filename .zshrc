@@ -63,6 +63,15 @@ export LC_ALL=en_US.UTF-8
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
+fi
+
+if [[ $(uname) == "Darwin" ]]; then
+	for key in ~/.ssh/id_*; do
+		if [[ -f "$key" && ! "$key" =~ \.pub$ ]]; then
+			/usr/bin/ssh-add --apple-use-keychain "$key"
+		fi
+	done
+else
 	ssh-add
 fi
 
