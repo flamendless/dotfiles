@@ -163,5 +163,13 @@ esac
 
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
+# fnm
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "`fnm env`"
+fi
+export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+fpath=(/Users/flamendless/.docker/completions $fpath)
+
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
