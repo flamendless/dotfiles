@@ -161,7 +161,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+if [[ ! $(uname) == "Darwin" ]]; then
+	export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+fi
 
 # fnm
 FNM_PATH="/opt/homebrew/opt/fnm/bin"

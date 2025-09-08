@@ -20,7 +20,8 @@ install_main() {
         chafa \
         eza \
         bash \
-        scroll-reverser
+        scroll-reverser \
+        amethyst
 
     echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells;
 }
