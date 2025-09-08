@@ -19,7 +19,8 @@ install_main() {
         lsof \
         chafa \
         eza \
-        bash
+        bash \
+        scroll-reverser
 
     echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells;
 }
