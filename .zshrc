@@ -28,7 +28,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-if [[ $(uname) == "Darwin" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
 	source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 	source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 	fpath+=($(brew --prefix)/share/zsh/site-functions)
@@ -65,7 +65,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
 fi
 
-if [[ $(uname) == "Darwin" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
 	for key in ~/.ssh/id_*; do
 		if [[ -f "$key" && ! "$key" =~ \.pub$ ]]; then
 			/usr/bin/ssh-add --apple-use-keychain "$key"
@@ -112,7 +112,7 @@ export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-if [[ ! $(uname) == "Darwin" ]]; then
+if [[ "$(uname)" != "Darwin" ]]; then
 	export GEM_HOME="$(gem env user_gemhome)"
 	export PATH="$PATH:$GEM_HOME/bin"
 else
@@ -161,7 +161,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-if [[ ! $(uname) == "Darwin" ]]; then
+if [[ "$(uname)" != "Darwin" ]]; then
 	export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 fi
 
