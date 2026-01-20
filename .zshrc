@@ -31,6 +31,7 @@ compinit
 if [[ "$(uname)" == "Darwin" ]]; then
 	source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 	source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+	export PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
 	fpath+=($(brew --prefix)/share/zsh/site-functions)
 else
 	source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -86,8 +87,10 @@ alias mv="mv -iv"
 alias cp="cp -iv"
 alias rm="rm -iv"
 alias cls="clear"
-alias ls="eza -l --icons"
-alias la="eza -la --icons"
+# alias ls="eza -l --icons"
+# alias la="eza -la --icons"
+alias ls='eza -l --all --group-directories-first --git --icons=auto --long --header --classify=auto'
+alias la='eza -la --all --group-directories-first --git --icons=auto --long --header --classify=auto'
 alias zshrc="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias grep="noglob grep --color=auto --exclude-dir=(.bzr, CVS,.git,.hg,.svn)"
@@ -122,6 +125,10 @@ if [[ "$(uname)" != "Darwin" ]]; then
 	export PATH="$PATH:$GEM_HOME/bin"
 else
 	export PATH="/opt/homebrew/bin:$PATH"
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+	[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 fi
 
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
