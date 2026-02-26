@@ -110,6 +110,7 @@ alias gbs="~/dotfiles/better-git-branch.sh"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
@@ -182,8 +183,14 @@ FNM_PATH="/opt/homebrew/opt/fnm/bin"
 if [ -d "$FNM_PATH" ]; then
   eval "`fnm env`"
 fi
-export PATH="$(brew --prefix mysql-client)/bin:$PATH"
-fpath=(/Users/flamendless/.docker/completions $fpath)
+
+if [[ "$(uname)" == "Darwin" ]]; then
+	export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+	export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
+	export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
+	export PKG_CONFIG_PATH="/opt/homebrew/opt/mysql-client/lib/pkgconfig"
+	fpath=(/Users/flamendless/.docker/completions $fpath)
+fi
 
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
