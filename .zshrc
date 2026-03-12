@@ -52,14 +52,8 @@ bindkey '^x^e' edit-command-line
 
 # PERSONAL
 export VISUAL=nvim
-export PATH=~/.local/bin:$PATH
 export EDITOR=nvim
 export KEYTIMEOUT=1
-
-export ANDROID_HOME=/opt/android-sdk
-export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/opt/android-sdk/build-tools/33.0.1/
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!.git/*" --glob "!migrations" --glob "!tests"'
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
@@ -190,6 +184,19 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 	export PKG_CONFIG_PATH="/opt/homebrew/opt/mysql-client/lib/pkgconfig"
 	fpath=(/Users/flamendless/.docker/completions $fpath)
+
+	export ANDROID_HOME=$HOME/Android/sdk
+	export ANDROID_SDK_ROOT=$ANDROID_HOME
+	export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+	export PATH=$PATH:$ANDROID_HOME/platform-tools
+	export PATH=$PATH:$ANDROID_HOME/emulator
+	export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+	export CHROME_EXECUTABLE="/Applications/Vivaldi.app/Contents/MacOS/Vivaldi"
+else
+	export ANDROID_HOME=/opt/android-sdk
+	export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
+	export PATH=$PATH:$ANDROID_HOME/platform-tools
+	export PATH=$PATH:/opt/android-sdk/build-tools/33.0.1/
 fi
 
 source <(fzf --zsh)
