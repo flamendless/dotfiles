@@ -191,7 +191,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 	export PATH=$PATH:$ANDROID_HOME/emulator
 	export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
-	export CHROME_EXECUTABLE="/Applications/Vivaldi.app/Contents/MacOS/Vivaldi"
 else
 	export ANDROID_HOME=/opt/android-sdk
 	export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
