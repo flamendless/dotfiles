@@ -24,10 +24,12 @@ install_main() {
 install_zsh() {
     yay -Sy \
         zsh \
-        zsh-history-substring-search \
-        zsh-autosuggestions \
         zsh-pure-prompt \
         tmux-plugin-manager
+
+    mkdir -p ~/.zsh
+    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-history-substring-search
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
     echo "to setup zsh as default shell. Run: chsh -s /usr/bin/zsh"
 }
