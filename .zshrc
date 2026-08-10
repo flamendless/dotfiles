@@ -109,7 +109,7 @@ eval "$(pyenv virtualenv-init -)"
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 # bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -161,7 +161,7 @@ if [ -d "$HOME/sqlcheck/sqlcheck-x86_64/bin/" ]; then
 fi
 
 # pnpm
-export PNPM_HOME="~/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
